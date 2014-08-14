@@ -1,7 +1,6 @@
 package com.company;
 
 import com.sun.tools.javac.util.Convert;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,21 +8,90 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        // write your code here
-        System.out.println("type here:");
-        String first = "";
-        try{
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            first = br.readLine();}
-        catch (IOException ex) {
-            System.out.println("smth bad");
+    //нужно ввести знак перед скобкой
+    public static String findDifference (String one,String two)
+    {
+        String dif="";
+        int a=0,b=0;
+        for (int i=0;i<one.length()-two.length();i++)
+        {
+            if (two.charAt(0)==one.charAt(i)&&two.charAt(two.length()-1)==one.charAt(i+two.length()-1))
+            {
+                a=i;
+                b=i+two.length()-1;
+                break;
+            }
         }
-        List answ = new ArrayList();
-        main2(first,answ);
-        System.out.println(answ.get(answ.size()-1));
+        for (int i=0;i<one.length();i++)
+        {
+            if (i<a-2||i>b+1)
+            {
+                dif+=one.charAt(i);
+            }
+        }
+        return dif;
     }
-    public static void main2(String first,List answ)
+    public static void deep (String word,List list)
+    {
+        int ch = 100;
+        while(ch!=0)
+        {
+            ch = check(word);
+            list.add(word);
+            word = showtheworld(word);
+        }
+    }
+    public static int check (String first)
+    {
+        Character c1 = '(';
+        int count =0;
+        for (int i=0;i<first.length();i++)
+        {
+            if (first.charAt(i)==c1)
+                count++;
+        }
+        if (count>1)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    public static String showtheworld(String first)
+    {
+        Character c1 = '(',c2=')';
+        int a=0,b=0;
+        String second="";
+        int count=0;
+        for (int i=0;i<first.length();i++)
+        {
+            if (first.charAt(i)==c1)
+            {
+                a = i;
+                for (int j=first.length()-1;j>0;j--)
+                {
+                    if (first.charAt(j)==c2) {
+                        b = j;
+                        break;
+                    }
+                }
+                for (int j=0;j<first.length();j++)
+                {
+                    if (j>a&j<b)
+                    {
+                        second+=first.charAt(j);
+                    }
+                    count++;
+                }
+            }
+            if (count>1)
+                break;
+        }
+        return second;
+    }
+    public static String main2(String first)
     {
         first = first.trim();
         Character sep1[] = new Character[]{'+','-','*','/',')','(','E'};
@@ -33,16 +101,24 @@ public class Main {
         List deals = new ArrayList();
         List deals2 = new ArrayList();
         List numbers2 = new ArrayList();
+        List answ = new ArrayList();
         Character c1 = '(';
         Character c2 = ')';
         int a=0;
         int b=0;
         String second = "";
+        int counts=0;
         for (int i=0;i<first.length();i++)
         {
-            if (first.charAt(i)==c1)
+            for (int j=0;j<first.length();j++)
             {
-                a = i;
+                if (first.charAt(j)==c1) {
+                    counts++;
+                    a=j;
+                }
+            }
+            if (counts>=1)
+            {
                 for (int j=first.length()-1;j>0;j--)
                 {
                     if (first.charAt(j)==c2) {
@@ -64,7 +140,7 @@ public class Main {
                 for (int j=0;j<numbers2.size();j++) {
                     num[j] = Double.parseDouble(numbers2.get(j).toString());
                 }
-                counting(num,deals2,answ);
+                counting(num,deals2,answ);//здесь получаем результат вычисления
                 numbers.clear();
                 deals.clear();
                 numbers2.clear();
@@ -92,11 +168,46 @@ public class Main {
                 counting(num1,deals2,answ);
                 break;
             }
-            else
-            {
-
+            else {
+                first.trim();
+                makeNumbers(first,sep1,numbers);
+                makeDeals(first,sep3,deals);
+                lookingForMultiply(numbers,numbers2,deals,deals2);
+                Double num[] = new Double[numbers2.size()];
+                for (int j=0;j<numbers2.size();j++) {
+                    num[j] = Double.parseDouble(numbers2.get(j).toString());
+                }
+                counting(num,deals,answ);
+                break;
             }
         }
+        return answ.get(answ.size()-1).toString();
+    }
+    public static void main(String[] args) {
+	// write your code here
+        System.out.println("type here:");
+        String first = "";
+        try{
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            first = br.readLine();}
+        catch (IOException ex) {
+            System.out.println("smth bad");
+        }
+        List var = new ArrayList();
+        List answer = new ArrayList();
+        deep(first,var);
+        String answ = "";
+        //answ = main2(first);
+        for (int i=var.size()-1;i>0;i--)
+        {
+            answ += findDifference(var.get(i-1).toString(),var.get(i).toString());
+        }
+        answ+=main2(var.get(var.size()-1).toString());
+        answ = main2(answ);
+        //String answ = findDifference(var.get(var.size()-2).toString(),var.get(var.size()-1).toString());
+        System.out.println(answ);
+        /*for (int i=0;i<answer.size();i++)
+            System.out.println(answer.get(i));*/
     }
     public static void counting (Double array[],List deals,List answer)
     {
