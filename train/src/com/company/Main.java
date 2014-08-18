@@ -9,87 +9,34 @@ import java.util.List;
 
 public class Main {
     //нужно ввести знак перед скобкой
-    public static String findDifference (String one,String two)
+    //раскрываются только одни скобки
+    public static String hey (String word)
     {
-        String dif="";
-        int a=0,b=0;
-        for (int i=0;i<one.length()-two.length();i++)
-        {
-            if (two.charAt(0)==one.charAt(i)&&two.charAt(two.length()-1)==one.charAt(i+two.length()-1))
-            {
-                a=i;
-                b=i+two.length()-1;
-                break;
-            }
-        }
-        for (int i=0;i<one.length();i++)
-        {
-            if (i<a-2||i>b+1)
-            {
-                dif+=one.charAt(i);
-            }
-        }
-        return dif;
-    }
-    public static void deep (String word,List list)
-    {
-        int ch = 100;
-        while(ch!=0)
-        {
-            ch = check(word);
-            list.add(word);
-            word = showtheworld(word);
-        }
-    }
-    public static int check (String first)
-    {
+        String answer = "";
+        int count=0;
         Character c1 = '(';
-        int count =0;
-        for (int i=0;i<first.length();i++)
+        Character c2 = ')';
+        Character undo = ' ';
+        int a = 0;
+        int b = 0;
+        List index1 = new ArrayList();
+        List index2 = new ArrayList();
+        for (int i=0;i<word.length();i++)
         {
-            if (first.charAt(i)==c1)
+            if (word.charAt(i)==c1)
                 count++;
         }
-        if (count>1)
-        {
-            return 1;
-        }
+        if (count<=1)
+            return main2(word);
         else
         {
-            return 0;
-        }
-    }
-    public static String showtheworld(String first)
-    {
-        Character c1 = '(',c2=')';
-        int a=0,b=0;
-        String second="";
-        int count=0;
-        for (int i=0;i<first.length();i++)
-        {
-            if (first.charAt(i)==c1)
-            {
-                a = i;
-                for (int j=first.length()-1;j>0;j--)
-                {
-                    if (first.charAt(j)==c2) {
-                        b = j;
-                        break;
-                    }
-                }
-                for (int j=0;j<first.length();j++)
-                {
-                    if (j>a&j<b)
-                    {
-                        second+=first.charAt(j);
-                    }
-                    count++;
-                }
+            for (int i=0;i<word.length();i++) {
+                if (word.charAt(i) == c1)
+                    index1.add(i);
+                else if (word.charAt(i)==c2)
+                    index2.add(i);
             }
-            if (count>1)
-                break;
         }
-        return second;
     }
     public static String main2(String first)
     {
@@ -195,19 +142,8 @@ public class Main {
         }
         List var = new ArrayList();
         List answer = new ArrayList();
-        deep(first,var);
-        String answ = "";
-        //answ = main2(first);
-        for (int i=var.size()-1;i>0;i--)
-        {
-            answ += findDifference(var.get(i-1).toString(),var.get(i).toString());
-        }
-        answ+=main2(var.get(var.size()-1).toString());
-        answ = main2(answ);
-        //String answ = findDifference(var.get(var.size()-2).toString(),var.get(var.size()-1).toString());
-        System.out.println(answ);
-        /*for (int i=0;i<answer.size();i++)
-            System.out.println(answer.get(i));*/
+        String ans = main2(first);
+        System.out.println(ans);
     }
     public static void counting (Double array[],List deals,List answer)
     {
