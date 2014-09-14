@@ -23,8 +23,11 @@ public class Main {
         ArrayList verbs = new ArrayList();
         ArrayList nouns = new ArrayList();
         String word = "";
+        int count=0;
+        // слова, которые вводятся в консоль точно попадают в allArray;
         for (int i=0;i<allArray.length;i++)
         {
+            count=0;
             for (int j=0;j<verbEND.length;j++)
             {
                 if (j==0 || j== 1)
@@ -32,60 +35,65 @@ public class Main {
                     word = String.valueOf(allArray[i].charAt(allArray[i].length()-1));
                     if (word == verbEND[j])
                     {
-                        verbs.add(verbEND[j]);
+                        verbs.add(allArray[i]);
                     }
                     else
                     {
-                        nouns.add((verbEND[j]));
+                        count++;
                     }
                 }
                 if (j==3 || j==2)
                 {
-                    word = String.valueOf(allArray[i].charAt(allArray[i].length()-1))+String.valueOf(allArray[i].charAt(allArray[i].length()-2));
-                    if (word == verbEND[j])
+                    word = String.valueOf(allArray[i].charAt(allArray[i].length()-2)).concat(String.valueOf(allArray[i].charAt(allArray[i].length()-1)));
+                    if (word.equals(verbEND[j]))
                     {
-                        verbs.add(verbEND[j]);
+                        verbs.add(allArray[i]);
                     }
                     else
                     {
-                        nouns.add(verbEND[j]);
+                        count++;
                     }
                 }
                 if (j==5 || j == 4)
                 {
-                    word = String.valueOf(allArray[i].charAt(allArray[i].length()-1))+String.valueOf(allArray[i].charAt(allArray[i].length()-2));
-                    if (word == verbEND[j])
+                    word = String.valueOf(allArray[i].charAt(allArray[i].length()-2)).concat(String.valueOf(allArray[i].charAt(allArray[i].length()-1)));
+                    if (word.equals(verbEND[j]))
                     {
-                        verbs.add(verbEND[j]);
+                        verbs.add(allArray[i]);
                     }
                     else
                     {
-                        nouns.add(verbEND[j]);
+                        count++;
                     }
                 }
                 if (j==7 || j==6)
                 {
-                    word = String.valueOf(allArray[i].charAt(allArray[i].length()-1))+String.valueOf(allArray[i].charAt(allArray[i].length()-2));
-                    if (word == verbEND[j])
+                    word = String.valueOf(allArray[i].charAt(allArray[i].length()-2)).concat(String.valueOf(allArray[i].charAt(allArray[i].length()-1)));
+                    if (word.equals(verbEND[j]))
                     {
-                        verbs.add(verbEND[j]);
+                        verbs.add(allArray[i]);
                     }
                     else
                     {
-                        nouns.add(verbEND[j]);
+                        count++;
                     }
                 }
                 if (j==8 || j ==9)
                 {
-                    word = String.valueOf(allArray[i].charAt(allArray[i].length()-1))+String.valueOf(allArray[i].charAt(allArray[i].length()-2));
-                    if (word == verbEND[j])
+                    word = String.valueOf(allArray[i].charAt(allArray[i].length()-2)).concat(String.valueOf(allArray[i].charAt(allArray[i].length()-1)));
+                    if (word.equals(verbEND[j]))
                     {
-                        verbs.add(verbEND[j]);
+                        verbs.add(allArray[i]);
                     }
                     else
                     {
-                        nouns.add(verbEND[j]);
+                        count++;
                     }
+                }
+                if (count==10)
+                {
+                    nouns.add(allArray[i]);
+                    count=0;
                 }
             }
         }
