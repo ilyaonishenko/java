@@ -3,9 +3,15 @@ public class Main
 {
   public static void main (String[] args)
   {
-    System.out.println("Введите первое число");
+    System.out.println("Введите выражение");
     Scanner sc = new Scanner(System.in);
-    String aString = sc.next();
+    String impression = sc.next();
+    parser parser = new parserclass();
+    String res = "";
+    res = parser.firstStep(impression);
+    System.out.println(res);
+
+    /*String aString = sc.next();
     String bString = sc.next();
     calc c = new calc();
     double w = 0;
@@ -81,6 +87,8 @@ public class Main
           break;
         }
       }
+
     }
+    */
   }
 }
