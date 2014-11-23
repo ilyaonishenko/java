@@ -9,7 +9,7 @@ public class Main
     parser parser = new parserclass();
     String res = "";
     res = parser.firstStep(impression);
-    System.out.println(res);
+    System.out.println("i return "+res);
 
     /*String aString = sc.next();
     String bString = sc.next();

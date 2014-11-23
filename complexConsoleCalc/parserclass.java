@@ -4,17 +4,59 @@ public class parserclass implements parser
   calc c = new calc();
   public String firstStep(String text)
   {
+  //  if (text.length()==1)
+    //  return text;
   //  System.out.println("I'm in parserclass");
   //  System.out.println(text);
     boolean check = false;
+    int n = 0;
+    int n2 = 0;
+    String hero = "";
     for (int i=0;i<text.length();i++)
     {
       if (text.charAt(i)=='(')
+      {
         check = true;
+        n=i+1;
+      }
     }
     if (check==true)
     {
-      //System.out.println("Check is true");
+      String text2 = text;
+      System.out.println("Check is true");
+      for (int i = text.length()-1;i>=0;i--)
+      {
+        if (text.charAt(i)==')')
+          n2 = i;
+      }
+      String work="";
+      for (int i=n;i<n2;i++)
+      {
+        work+=String.valueOf(text.charAt(i));
+      }
+      hero = firstStep(work);
+      System.out.println(hero+" hero was found");
+      text = "";
+      boolean ch=false;
+      for (int i=0;i<text2.length();i++)
+      {
+        if (text2.charAt(i)==')'||text2.charAt(i)=='(')
+        {
+          continue;
+        }
+        if (i<n||i>n2)
+          text+=String.valueOf(text2.charAt(i));
+        if (i>n&&i<n2&&ch==false)
+        {
+          text+=hero;
+          ch = true;
+        }
+      }
+      check = false;
+    System.out.println(text+" it is a text in true");
+    System.out.println(text.length()+" it is a length in true");
+    /*if (text.length()==1)
+      return text;*/
     }
     String walker = "";
     int counter = 0;
@@ -22,7 +64,7 @@ public class parserclass implements parser
     String answer="";
     if (check==false)
     {
-      //System.out.println("check is false");
+      System.out.println("check is false");
       ArrayList<String> firstList = new ArrayList<String>();
       ArrayList<String> secondList = new ArrayList<String>();
       Character[] sep = new Character[]{'+','-','/','*'};
