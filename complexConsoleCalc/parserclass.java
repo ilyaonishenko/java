@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 public class parserclass implements parser
 {
+
+
+  //  ОБЯЗАТЕЛЬНО НАСТРОИТЬ СКОБКИ !!!!!!
   calc c = new calc();
   public String chooseStep(String text)
   {
     boolean check  = false;
+    String answer = "";
     for (int i=0;i<text.length();i++)
     {
       if (text.charAt(i)=='i')
@@ -15,15 +19,16 @@ public class parserclass implements parser
     if (check == true)
     {
       //System.out.println("I choose second step");
-      secondStep(text);
+      answer = secondStep(text);
     }
     else
     {
       //System.out.println("I choose first Step");
-      firstStep(text);
+      answer = firstStep(text);
     }
-    return "0";
+    return answer;
   }
+
   public String firstStep(String text)
   {
   //  if (text.length()==1)
@@ -31,9 +36,19 @@ public class parserclass implements parser
   //  System.out.println("I'm in parserclass");
   //  System.out.println(text);
     boolean check = false;
+    boolean checkForBrackets= false;
+    boolean aLotOfBrackets = false;
     int n = 0;
     int n2 = 0;
+    int n11=0,n12 =0, n13=0, n14=0;
     String hero = "";
+
+    //
+    //
+    // Вот тут работаем со скобками.
+    //
+    //
+    //
     for (int i=0;i<text.length();i++)
     {
       if (text.charAt(i)=='(')
@@ -42,14 +57,48 @@ public class parserclass implements parser
         n=i+1;
       }
     }
-    if (check==true)
+    for (int i=text.length()-1;i>=0;i--)
+    {
+      if (text.charAt(i)=='(')
+      {
+        n11 = i+1;
+      }
+    }
+    if (n11==n&&check==true)
+    {
+      checkForBrackets = true;
+      System.out.println("В системе всего одна пара скобок");
+      // Определенная проверка того, что всего одна скобочка.
+    }
+    for ( int i=0;i<text.length();i++)
+    {
+
+    }
+
+    //  5+(5+5)+5*(6-3) это нет
+    //
+    //  7*(6+3+(8-3))-2 это работает
+    //
+
+
+    if (n11!=n)
+    {
+      aLotOfBrackets = true;
+      System.out.println("A lot of Brackets");
+    }
+    //checkForBrackets==true
+    if (check == true)
     {
       String text2 = text;
-      //System.out.println("Check is true");
-      for (int i = text.length()-1;i>=0;i--)
+      System.out.println("Check is true");
+      //for (int i = text.length()-1;i>=0;i--)
+      for (int i=0;i<text.length();i++)
       {
         if (text.charAt(i)==')')
+        {
           n2 = i;
+          break;
+        }
       }
       String work="";
       for (int i=n;i<n2;i++)
@@ -75,11 +124,21 @@ public class parserclass implements parser
         }
       }
       check = false;
+      // из этого можно попробовать сделать отдельный метод
+
   //  System.out.println(text+" it is a text in true");
   //  System.out.println(text.length()+" it is a length in true");
     /*if (text.length()==1)
       return text;*/
     }
+
+    //
+    //
+    //
+    //      Тут заканчивается работа со скобочками
+    //
+    //
+    //
     String walker = "";
     int counter = 0;
     boolean check2 = false;
@@ -157,10 +216,10 @@ public class parserclass implements parser
         return firstList.get(0);
       }
       //System.out.println("size of firstList is " +String.valueOf(firstList.size()));
-      /*for (int i=0;i<firstList.size();i++)
+      for (int i=0;i<firstList.size();i++)
       {
         System.out.println(firstList.get(i));
-      }*/
+      }
       for (int i=0;i<firstList.size();i++)
       {
         if (firstList.get(i).equals("+"))
@@ -324,8 +383,11 @@ public class parserclass implements parser
   }
   public String secondStep(String text)
   {
+    // впереди большая работа: раcпарсить полученный стринг так и передать его в метод twoBrackets
     int counter1 = 0;
     int counter2 = 0;
+    int n1=0,n2=0,n3=0,n4=0;
+    boolean check1 = false, check2 = false;
     for (int i=0;i<text.length();i++)
     {
       if (text.charAt(i) == ')')
@@ -333,15 +395,41 @@ public class parserclass implements parser
       if (text.charAt(i)=='(')
         counter2++;
     }
+    if (counter1==counter2&&counter1==2)
+    {
+      //сначала нужно тестировать самый простой случай -  когда просто две скобки и знак между ними
+      // сделаем проверку, чтобы скобки были не внутри друг друга
+      for (int i=0;i<text.length();i++)
+      {
+        if (text.charAt(i)=='(')
+        {
+          n1 = i;
+          //check = true;
+        }
+        if (text.charAt(i)==')')
+        {
+          n2 = i;
+          //check = true;
+        }
+      }
+    }
+
+    //РАБОТЫ НАД КОМПЛЕКСНОЙ ЧАСТЬЮ ЗАМОРАЖИВАЮТСЯ!!!!!!!!!!!\\
+    //ПОКА ОБЫЧНЫЙ КАЛЬКУЛЯТОР РАБОТАЕТ НЕПРАВИЛЬНО !!!!!!!!!\\
+    //ЭТО ВСЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
+
+
+    //Character sign = '*';// знак, который нужно использовать
     // тут сделать определение двух скобочек и знака между ними
     // все разделить на 2 стринга
     //if (counter1==counter2&&counter1==2)
       // text = twoBrackets(text,text);
-      text = twoBrackets(text,text);
+    //  text = twoBrackets(text,text,sign); нужно сделать ввод
     return text;
   }
-  public String twoBrackets(String text1,String text2)
+  public String twoBrackets(String text1,String text2, Character sign)
   {
+    String answer = "";
     //System.out.println("I'm in two twoBrackets");
     ArrayList<String> first = new ArrayList<String>();
     ArrayList<String> second = new ArrayList<String>();
@@ -383,16 +471,33 @@ public class parserclass implements parser
     }
     first.clear();
     second.clear();
-    for (int i=0;i<ffirst.size();i++)
+    /*for (int i=0;i<ffirst.size();i++)
       System.out.println("first "+ffirst.get(i));
     for (int i=0;i<ssecond.size();i++)
       System.out.println("second "+ssecond.get(i));
     for (int i=0;i<ifirst.size();i++)
       System.out.println("ifirst "+ifirst.get(i));
     for (int i=0;i<isecond.size();i++)
-      System.out.println("isecond "+isecond.get(i));
+      System.out.println("isecond "+isecond.get(i));*/
+    if (sign == '+')
+    {
+      answer = c.performComplexAddition(ffirst.get(0),ssecond.get(0),ifirst.get(0),isecond.get(0));
+    }
+    if (sign == '-')
+    {
+      answer = c.performComplexSubtraction(ffirst.get(0),ssecond.get(0),ifirst.get(0),isecond.get(0));
+    }
+    if (sign == '/')
+    {
+      answer = c.performComplexDivision(ffirst.get(0),ssecond.get(0),ifirst.get(0),isecond.get(0));
+    }
+    if (sign == '*')
+    {
+      answer = c.performComplexMultiplication(ffirst.get(0),ssecond.get(0),ifirst.get(0),isecond.get(0));
+    }
       // тут мы сделали разделение на на списки действ и мнимых чисел
-    return text1;
+
+    return answer;
   }
   public ArrayList<String> lookForI(String text)
   {

@@ -9,7 +9,15 @@ public class Main
     parser parser = new parserclass();
     String res = "";
     res = parser.chooseStep(impression);
-    //System.out.println("i return "+res);
+    System.out.println("i return "+res);
+
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
+    // ВАЖНО !!! АХТУНГ И АЛЯРМ!!!!!!!!!!!!!!!!!!\\
+    // НЕ РАБОТАЕТ ФИШКА КОГДА (10+10)-(5-3)!!!!!\\
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
+
+
     //(5+6i)+(5+3i)
     /*String aString = sc.next();
     String bString = sc.next();
