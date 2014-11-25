@@ -18,20 +18,20 @@ public class calc
   {
     return operations.division(a,b);
   }
-  public String performComplexAddition(String a,String b)
+  public String performComplexAddition(String a,String b,String ai,String bi)
   {
-    return complexOperations.complexAddition(a,b);
+    return complexOperations.complexAddition(a,b,ai,bi);
   }
-  public String performComplexSubtraction(String a,String b)
+  public String performComplexSubtraction(String a,String b,String ai,String bi)
   {
-    return complexOperations.complexSubtraction(a,b);
+    return complexOperations.complexSubtraction(a,b,ai,bi);
   }
-  public String performComplexMultiplication(String a,String b)
+  public String performComplexMultiplication(String a,String b,String ai,String bi)
   {
-    return complexOperations.complexMultiplication(a,b);
+    return complexOperations.complexMultiplication(a,b,ai,bi);
   }
-  public String performComplexDivision(String a,String b)
+  public String performComplexDivision(String a,String b,String ai,String bi)
   {
-    return complexOperations.complexDivision(a,b);
+    return complexOperations.complexDivision(a,b,ai,bi);
   }
 }
