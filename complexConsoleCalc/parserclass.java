@@ -9,14 +9,19 @@ public class parserclass implements parser
     {
       if (text.charAt(i)=='i')
       {
-        System.out.println("I choose second step");
         check = true;
       }
     }
     if (check == true)
-      //secondStep(text);
+    {
+      //System.out.println("I choose second step");
+      secondStep(text);
+    }
     else
+    {
+      //System.out.println("I choose first Step");
       firstStep(text);
+    }
     return "0";
   }
   public String firstStep(String text)
@@ -40,7 +45,7 @@ public class parserclass implements parser
     if (check==true)
     {
       String text2 = text;
-      System.out.println("Check is true");
+      //System.out.println("Check is true");
       for (int i = text.length()-1;i>=0;i--)
       {
         if (text.charAt(i)==')')
@@ -52,7 +57,7 @@ public class parserclass implements parser
         work+=String.valueOf(text.charAt(i));
       }
       hero = firstStep(work);
-      System.out.println(hero+" hero was found");
+      //System.out.println(hero+" hero was found");
       text = "";
       boolean ch=false;
       for (int i=0;i<text2.length();i++)
@@ -70,8 +75,8 @@ public class parserclass implements parser
         }
       }
       check = false;
-    System.out.println(text+" it is a text in true");
-    System.out.println(text.length()+" it is a length in true");
+  //  System.out.println(text+" it is a text in true");
+  //  System.out.println(text.length()+" it is a length in true");
     /*if (text.length()==1)
       return text;*/
     }
@@ -81,7 +86,7 @@ public class parserclass implements parser
     String answer="";
     if (check==false)
     {
-      System.out.println("check is false");
+    //  System.out.println("check is false");
       ArrayList<String> firstList = new ArrayList<String>();
       ArrayList<String> secondList = new ArrayList<String>();
       Character[] sep = new Character[]{'+','-','/','*'};
@@ -319,7 +324,160 @@ public class parserclass implements parser
   }
   public String secondStep(String text)
   {
-
+    int counter1 = 0;
+    int counter2 = 0;
+    for (int i=0;i<text.length();i++)
+    {
+      if (text.charAt(i) == ')')
+        counter1++;
+      if (text.charAt(i)=='(')
+        counter2++;
+    }
+    // тут сделать определение двух скобочек и знака между ними
+    // все разделить на 2 стринга
+    //if (counter1==counter2&&counter1==2)
+      // text = twoBrackets(text,text);
+      text = twoBrackets(text,text);
     return text;
+  }
+  public String twoBrackets(String text1,String text2)
+  {
+    //System.out.println("I'm in two twoBrackets");
+    ArrayList<String> first = new ArrayList<String>();
+    ArrayList<String> second = new ArrayList<String>();
+    ArrayList<String> ifirst = new ArrayList<String>();
+    ArrayList<String> isecond = new ArrayList<String>();
+    ArrayList<String> ffirst = new ArrayList<String>();
+    ArrayList<String> ssecond = new ArrayList<String>();
+    first = lookForI(text1);
+    second = lookForI(text2);
+    String maybe="";
+    for (int i=0;i<first.size();i++)
+    {
+      maybe="";
+      if (first.get(i).charAt(0)=='c')
+      {
+        for (int j=1;j<first.get(i).length();j++)
+          maybe+=String.valueOf(first.get(i).charAt(j));
+        ifirst.add(maybe);
+      }
+      else
+      {
+        ffirst.add(first.get(i));
+      }
+    }
+    maybe="";
+    for (int i=0;i<second.size();i++)
+    {
+      maybe = "";
+      if (second.get(i).charAt(0)=='c')
+      {
+        for (int j=1;j<second.get(i).length();j++)
+          maybe+=String.valueOf(second.get(i).charAt(j));
+        isecond.add(maybe);
+      }
+      else
+      {
+        ssecond.add(second.get(i));
+      }
+    }
+    first.clear();
+    second.clear();
+    for (int i=0;i<ffirst.size();i++)
+      System.out.println("first "+ffirst.get(i));
+    for (int i=0;i<ssecond.size();i++)
+      System.out.println("second "+ssecond.get(i));
+    for (int i=0;i<ifirst.size();i++)
+      System.out.println("ifirst "+ifirst.get(i));
+    for (int i=0;i<isecond.size();i++)
+      System.out.println("isecond "+isecond.get(i));
+      // тут мы сделали разделение на на списки действ и мнимых чисел
+    return text1;
+  }
+  public ArrayList<String> lookForI(String text)
+  {
+    boolean check2 = false;
+    String walker = "";
+    int counter=0;
+    ArrayList<String> firstList = new ArrayList<String>();
+    ArrayList<String> normalList = new ArrayList<String>();
+    ArrayList<String> complexList = new ArrayList<String>();
+    Character[] sep = new Character[]{'+','-','/','*'};
+    for (int i=0;i<text.length();i++)
+    {
+      /*if (text.charAt(i)!=' ');
+        firstList.add(String.valueOf(text.charAt(i)));*/
+        check2 = false;
+        for (int j=0;j<sep.length;j++)
+        {
+          if (text.charAt(i)==sep[j])
+          {
+            check2 = true;
+            counter = j;
+          }
+        }
+        if (check2 == true)
+        {
+          firstList.add(walker);
+          firstList.add(String.valueOf(sep[counter]));
+          walker = "";
+        }
+        if (check2 != true)
+        {
+          walker +=String.valueOf(text.charAt(i));
+          if (i==text.length()-1)
+          {
+            firstList.add(walker);
+            walker = "";
+          }
+        }
+      }
+      Character[] seps = new Character[]{'+','/','*'};
+      boolean getme = false;
+      String sign = "";
+      int num = 0;
+      for (int i=0;i<firstList.size();i++)
+      {
+        getme = false;
+        for (int j=0;j<firstList.get(i).length();j++)
+        {
+          if (firstList.get(i).charAt(j)=='i')
+          {
+            getme = true;
+          }
+        }
+        if (firstList.get(i).equals("+"))
+        {
+          //System.out.println("I found plus");
+          continue;
+        }
+        if (firstList.get(i).equals("-"))
+        {
+          sign = "-";
+          num = i;
+          continue;
+        }
+        if (getme == true)
+        {
+          if (i==num+1)
+            complexList.add(sign+firstList.get(i));
+          else
+            complexList.add(firstList.get(i));
+        }
+        if (getme!=true)
+        {
+          if (i==num+1)
+            normalList.add(sign+firstList.get(i));
+          else
+            normalList.add(firstList.get(i));
+        }
+      }
+      /*for (int i=0;i<normalList.size();i++)
+        System.out.println(normalList.get(i)+" normal");
+      for (int i=0;i<complexList.size();i++)
+        System.out.println(complexList.get(i)+" complex");*/
+      for (int i=0;i<complexList.size();i++)
+        normalList.add("c"+complexList.get(i));
+      return normalList;
   }
 }
