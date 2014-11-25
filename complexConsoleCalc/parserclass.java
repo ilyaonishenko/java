@@ -2,6 +2,23 @@ import java.util.ArrayList;
 public class parserclass implements parser
 {
   calc c = new calc();
+  public String chooseStep(String text)
+  {
+    boolean check  = false;
+    for (int i=0;i<text.length();i++)
+    {
+      if (text.charAt(i)=='i')
+      {
+        System.out.println("I choose second step");
+        check = true;
+      }
+    }
+    if (check == true)
+      //secondStep(text);
+    else
+      firstStep(text);
+    return "0";
+  }
   public String firstStep(String text)
   {
   //  if (text.length()==1)
@@ -299,5 +316,10 @@ public class parserclass implements parser
       System.out.println(newList.get(i));
     }*/
     return newList;
+  }
+  public String secondStep(String text)
+  {
+
+    return text;
   }
 }

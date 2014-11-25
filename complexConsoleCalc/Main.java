@@ -5,11 +5,11 @@ public class Main
   {
     System.out.println("Введите выражение");
     Scanner sc = new Scanner(System.in);
-    //String impression = sc.next();
-    /*parser parser = new parserclass();
+    String impression = sc.next();
+    parser parser = new parserclass();
     String res = "";
-    res = parser.firstStep(impression);
-    System.out.println("i return "+res);*/
+    res = parser.chooseStep(impression);
+    //System.out.println("i return "+res);
     //(5+6i)+(5+3i)
     /*String aString = sc.next();
     String bString = sc.next();
