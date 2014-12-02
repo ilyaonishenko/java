@@ -8,4 +8,5 @@ public interface parser
   public String chooseStep(String text);
   public String twoBrackets(String text1,String text2,Character sign);
   public ArrayList<String> lookForI(String text);
+  public String preOrder(String text);
 }

@@ -8,7 +8,8 @@ public class Main
     String impression = sc.next();
     parser parser = new parserclass();
     String res = "";
-    res = parser.chooseStep(impression);
+    //res = parser.chooseStep(impression);
+    res = parser.preOrder(impression);
     System.out.println("i return "+res);
 
 

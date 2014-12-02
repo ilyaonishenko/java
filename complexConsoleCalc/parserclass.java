@@ -4,6 +4,14 @@ public class parserclass implements parser
 
 
   //  ОБЯЗАТЕЛЬНО НАСТРОИТЬ СКОБКИ !!!!!!
+  /*
+  Итак, программа умеет открывать единственные скобки.
+  Задача - при поступлении выражения раскрывать скобки по очереди и получатьзначения из них
+  Пара принципиально различающихся вариантов:
+  скобки и скобки рядом
+  скобки в скобках
+
+  */
   calc c = new calc();
   public String chooseStep(String text)
   {
@@ -87,7 +95,7 @@ public class parserclass implements parser
       System.out.println("A lot of Brackets");
     }
     //checkForBrackets==true
-    if (check == true)
+    if (checkForBrackets == true)
     {
       String text2 = text;
       System.out.println("Check is true");
@@ -380,6 +388,46 @@ public class parserclass implements parser
       System.out.println(newList.get(i));
     }*/
     return newList;
+  }
+  public String preOrder (String text)
+  {
+    int countes = 0;
+    for (int i=0;i<text.length();i++)
+    {
+      if (text.charAt(i)=='(')
+      {
+        countes++;
+      }
+    }
+    if (countes<2)
+    {
+      return firstStep(text);
+    }
+    else
+    {
+      int bracketsArr[] = new int [countes];
+      int brackets2Arr[] = new int [countes];
+      int pointer=0;
+      for (int i=0;i<text.length();i++)
+      {
+        if (text.charAt(i)=='(')
+        {
+          bracketsArr[pointer] = i;
+          pointer++;
+        }
+      }
+      pointer=0;
+      for (int i=text.length()-1;i>=0;i--)
+      {
+        if (text.charAt(i)==')')
+        {
+          brackets2Arr[pointer]=i;
+          pointer++;
+        }
+      }
+
+      return text;
+    }
   }
   public String secondStep(String text)
   {
