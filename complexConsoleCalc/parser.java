@@ -9,4 +9,10 @@ public interface parser
   public String twoBrackets(String text1,String text2,Character sign);
   public ArrayList<String> lookForI(String text);
   public String preOrder(String text);
+  public String bracketsNearBrackets(String text);
+  public String bracketsInBrackets(String text);
+  public int lookForMin(int[] array);
+  public int lookForMax(int[] array);
+  public String badSign(String text);
+  public ArrayList<String> firstNumber(ArrayList<String> arrayList);
 }

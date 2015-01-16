@@ -13,7 +13,7 @@ public class parserclass implements parser
 
   */
   calc c = new calc();
-  public String chooseStep(String text)
+  public String chooseStep(String text)//complex or not
   {
     boolean check  = false;
     String answer = "";
@@ -41,8 +41,9 @@ public class parserclass implements parser
   {
   //  if (text.length()==1)
     //  return text;
-  //  System.out.println("I'm in parserclass");
+  // System.out.println("I'm in parserclass");
   //  System.out.println(text);
+    text = badSign(text);
     boolean check = false;
     boolean checkForBrackets= false;
     boolean aLotOfBrackets = false;
@@ -50,7 +51,7 @@ public class parserclass implements parser
     int n2 = 0;
     int n11=0,n12 =0, n13=0, n14=0;
     String hero = "";
-
+    //
     //
     //
     // Вот тут работаем со скобками.
@@ -59,10 +60,12 @@ public class parserclass implements parser
     //
     for (int i=0;i<text.length();i++)
     {
+      //System.out.println("I'm here");
       if (text.charAt(i)=='(')
       {
         check = true;
         n=i+1;
+        //System.out.println(text.charAt(n+1));
       }
     }
     for (int i=text.length()-1;i>=0;i--)
@@ -70,12 +73,13 @@ public class parserclass implements parser
       if (text.charAt(i)=='(')
       {
         n11 = i+1;
+        //System.out.println(text.charAt(n+1));
       }
     }
     if (n11==n&&check==true)
     {
       checkForBrackets = true;
-      System.out.println("В системе всего одна пара скобок");
+      //System.out.println("В системе всего одна пара скобок");
       // Определенная проверка того, что всего одна скобочка.
     }
     for ( int i=0;i<text.length();i++)
@@ -87,18 +91,16 @@ public class parserclass implements parser
     //
     //  7*(6+3+(8-3))-2 это работает
     //
-
-
     if (n11!=n)
     {
       aLotOfBrackets = true;
-      System.out.println("A lot of Brackets");
+      //System.out.println("A lot of Brackets");
     }
     //checkForBrackets==true
     if (checkForBrackets == true)
     {
       String text2 = text;
-      System.out.println("Check is true");
+    //  System.out.println("Check is true");
       //for (int i = text.length()-1;i>=0;i--)
       for (int i=0;i<text.length();i++)
       {
@@ -210,7 +212,8 @@ public class parserclass implements parser
           }*/
 
       }
-      //System.out.println("i want to say smth");
+      ///////jasdlkasbdalsdasklfblkadsbflkasdbvlasdbvlhadsbvlasdbvlksadbvlkasdbvlksjdbv;djksvb;aksdbv;sdvbs;advb;sdavb;dsvb;as;l
+      System.out.println("i want to say smth");
       for (int i=0;i<firstList.size();i++)
       {
         if (firstList.get(i).equals(String.valueOf(sep[2]))||firstList.get(i).equals(String.valueOf(sep[3])))
@@ -224,9 +227,10 @@ public class parserclass implements parser
         return firstList.get(0);
       }
       //System.out.println("size of firstList is " +String.valueOf(firstList.size()));
+      firstList = firstNumber(firstList);
       for (int i=0;i<firstList.size();i++)
       {
-        System.out.println(firstList.get(i));
+        //System.out.println(firstList.get(i));
       }
       for (int i=0;i<firstList.size();i++)
       {
@@ -391,6 +395,7 @@ public class parserclass implements parser
   }
   public String preOrder (String text)
   {
+    System.out.println("I HAVE "+text);
     int countes = 0;
     for (int i=0;i<text.length();i++)
     {
@@ -399,8 +404,10 @@ public class parserclass implements parser
         countes++;
       }
     }
+    System.out.println("there are "+countes);
     if (countes<2)
     {
+      System.out.println("I'm in");
       return firstStep(text);
     }
     else
@@ -417,7 +424,7 @@ public class parserclass implements parser
         }
       }
       pointer=0;
-      for (int i=text.length()-1;i>=0;i--)
+      for (int i=0;i<text.length();i++)
       {
         if (text.charAt(i)==')')
         {
@@ -425,9 +432,83 @@ public class parserclass implements parser
           pointer++;
         }
       }
-
-      return text;
+      String newText="";
+      if (bracketsArr[0+1]>brackets2Arr[0])
+      {
+        //one near one
+        String goaway = "";
+        for (int j=0;j<text.length();j++)
+        {
+          if (j<brackets2Arr[0]&&j>bracketsArr[0])
+          {
+            goaway+=text.charAt(j);
+          }
+        }
+        System.out.println(goaway);
+        goaway = firstStep(goaway);
+        for (int j=0;j<text.length();j++)
+        {
+          if (j==bracketsArr[0])
+          {
+            newText+=goaway;
+          }
+          if (j<=brackets2Arr[0]&&j>=bracketsArr[0])
+          {
+          }
+          else
+          newText+=text.charAt(j);
+        }
+        newText = preOrder(newText);
+      }
+      else
+      {
+        //one in one
+        System.out.println("I'm in one in one");
+        //int maxIn1=lookForMax(bracketsArr);
+        //int minIn2=lookForMin(brackets2Arr);
+        int maxIn1 = bracketsArr[0+1];
+        int minIn2 = brackets2Arr[0];
+        //System.out.println("max in 1   "+maxIn1);
+        //System.out.println("min in 2   "+minIn2);
+        //System.out.println("length    "+text.length());
+        String goaway = "";
+        //(10-(5-2))
+        for (int j=0;j<text.length();j++)
+        {
+        //  System.out.println(j);
+          if (j>maxIn1&&j<minIn2)
+          {
+          //  System.out.println("_____"+j);
+            goaway+=text.charAt(j);
+          }
+        }
+        System.out.println("Go away   "+goaway);
+        goaway = firstStep(goaway);
+        for (int j=0;j<text.length();j++)
+        {
+          if (j==maxIn1)
+          {
+            newText+=goaway;
+          }
+          if (j>=maxIn1&&j<=minIn2)
+          {
+          }
+          else
+          newText+=text.charAt(j);
+        }
+        newText =  preOrder(newText);
+      }
+      return newText;
     }
+  }
+  //look 2 ways : brackets in brackets, or brackets near brackets;
+  public String bracketsNearBrackets(String text)
+  {
+    return text;
+  }
+  public String bracketsInBrackets(String text)
+  {
+    return text;
   }
   public String secondStep(String text)
   {
@@ -547,6 +628,26 @@ public class parserclass implements parser
 
     return answer;
   }
+  public int lookForMax(int[] array)
+  {
+    int buf=0;
+    for (int i=0;i<array.length;i++)
+    {
+      if (array[i]>buf)
+        buf = array[i];
+    }
+    return buf;
+  }
+  public int lookForMin(int[] array)
+  {
+    int buf=110;
+    for (int i=0;i<array.length;i++)
+    {
+      if (array[i]<buf)
+      buf = array[i];
+    }
+    return buf;
+  }
   public ArrayList<String> lookForI(String text)
   {
     boolean check2 = false;
@@ -632,5 +733,57 @@ public class parserclass implements parser
       for (int i=0;i<complexList.size();i++)
         normalList.add("c"+complexList.get(i));
       return normalList;
+  }
+  public String badSign(String text)
+  {
+    String addback = "+-";
+  //  String adddiv = "+/"
+    String newText="";
+    int count =0;
+    for (int i=0;i<text.length()-1;i++)
+    {
+      String check = String.valueOf(text.charAt(i))+String.valueOf(text.charAt(i+1));
+      if(check.equals(addback))
+      {
+        System.out.println("i found!");
+        for (int j=0;j<text.length();j++)
+        {
+          /*if (j==text.length()-1)
+          {
+            newText+=text.charAt(text.length()-1);
+          }*/
+          if (j<=i+1&&j>i)
+          {
+
+          }
+          if (j==i)
+          {
+            //newText+="-";
+          }
+          else
+            newText+=text.charAt(j);
+        }
+        System.out.println("i'll return "+newText);
+      }
+      else count++;
+    }
+    if (count == text.length()-1)
+      newText = text;
+    return newText;
+  }
+  public ArrayList<String> firstNumber(ArrayList<String> arrayList)
+  {
+    // первое число минусовое. И это оч оч оч оч плохо.
+    System.out.println("in first number");
+    for (int i=0;i<arrayList.size();i++)
+    System.out.println(arrayList.get(i));
+    if (Double.valueOf(arrayList.get(0))<0)
+    {
+      System.out.println("YES");
+      String buf = arrayList.get(0);
+      arrayList.set(0,arrayList.get(2));
+      arrayList.set(2,buf);
+    }
+    return arrayList;
   }
 }
