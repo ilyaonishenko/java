@@ -276,7 +276,7 @@ public class parserclass implements parser
         String go = "";
         for (int i=0;i<secondList.size();i++)
           go+=secondList.get(i);
-        //System.out. println(go+" is go");
+        //System.out. println(go+" is go");//////
         answer = firstStep(go);
       }
     }
@@ -295,7 +295,7 @@ public class parserclass implements parser
     }
     if (ch=='-')
     {
-      res = c.performSubtraction(list.get(0),list.get(2));
+        res = c.performAddition(list.get(0),list.get(1)+list.get(2));
     }
     if (ch=='/')
     {
@@ -773,17 +773,27 @@ public class parserclass implements parser
   }
   public ArrayList<String> firstNumber(ArrayList<String> arrayList)
   {
-    // первое число минусовое. И это оч оч оч оч плохо.
+    // neпервое число минусовое. И это оч оч оч оч плохо.
+    ArrayList<String> arrayList2 = new ArrayList<String>();
     System.out.println("in first number");
     for (int i=0;i<arrayList.size();i++)
     System.out.println(arrayList.get(i));
-    if (Double.valueOf(arrayList.get(0))<0)
+    System.out.println("look on work");
+    for (int i=0;i<arrayList.size();i++)
     {
-      System.out.println("YES");
-      String buf = arrayList.get(0);
-      arrayList.set(0,arrayList.get(2));
-      arrayList.set(2,buf);
+      System.out.println(arrayList.get(i));
+      if (arrayList.get(i).length()==0||arrayList.get(i).equals(""))
+      {
+        arrayList2.add(String.valueOf(arrayList.get(i+1)+arrayList.get(i+2)));
+        i+=2;
+        //System.out.println("arrayList2 "+arrayList2.get(i));
+        continue;
+      }
+      arrayList2.add(arrayList.get(i));
     }
-    return arrayList;
+    System.out.println("changed list");
+    for (int i=0;i<arrayList2.size();i++)
+    System.out.println(arrayList2.get(i));
+    return arrayList2;
   }
 }
