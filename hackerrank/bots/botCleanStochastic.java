@@ -31,10 +31,9 @@ static void nextMove(int posr, int posc, String[] board){
     int xnow = posc;
     int xdirt = 0;
     int ydirt = 0;
-    //System.out.println(board[2].charAt(board[2].length()-1));
     for (int i=0;i<board.length;i++)
     {
-      for (int j=0;j<board[i].length()-1;j++)
+      for (int j=0;j<=board[i].length()-1;j++)
       {
         if (board[i].charAt(j)=='d')
           {
