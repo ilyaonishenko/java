@@ -23,19 +23,20 @@ public class Solution {
   }
   static void printCLEAN()
   {
-    static void println("CLEAN");
+    System.out.println("CLEAN");
   }
 static void nextMove(int posr, int posc, String[] board){
         //add logic here
-    int xnow = posr;
-    int ynow = posc;
+    int ynow = posr;
+    int xnow = posc;
     int xdirt = 0;
     int ydirt = 0;
-    for (int i=ynow;i<board.length;i++)
+    //System.out.println(board[2].charAt(board[2].length()-1));
+    for (int i=0;i<board.length;i++)
     {
-      for (int j=xnow;i<board[i].length();j++)
+      for (int j=0;j<board[i].length()-1;j++)
       {
-        if (board[i].charAt(j).equals("d"))
+        if (board[i].charAt(j)=='d')
           {
             xdirt = j;
             ydirt = i;
@@ -43,15 +44,27 @@ static void nextMove(int posr, int posc, String[] board){
       }
     }
     if (xnow<xdirt)
+    {
       printRIGHT();
+      xnow++;
+    }
     else if (xnow>xdirt)
-      printLEFT()
+    {
+      printLEFT();
+      xnow--;
+    }
     else if (xnow==xdirt)
     {
       if (ynow>ydirt)
+      {
         printUP();
+        ynow--;
+      }
       else if (ynow<ydirt)
+      {
         printDOWN();
+        ynow++;
+      }
       else if (ynow==ydirt)
         printCLEAN();
     }
