@@ -4,6 +4,8 @@ public class twoStackAlgo
   public double evaluation(String text)
   {
     text = "("+text+")";
+    parser p = new parser();
+    String[] array = p.parser(text);
     TreeMap<String,Integer> precedence = new TreeMap<String,Integer>();
     precedence.put(")",0);
     precedence.put("(",0);
@@ -13,13 +15,14 @@ public class twoStackAlgo
     precedence.put("/",2);
     Stack<String> ops = new Stack<String>();
     Stack<Double> vals = new Stack<Double>();
-    int len = text.length();
+    int len = array.length;
     for (int i=0;i<len;i++)
     {
-      String sign = String.valueOf(text.charAt(i));
+      String sign = array[i];
       if (!precedence.containsKey(sign))
       {
         vals.push(Double.parseDouble(sign));
+        //настроить для считывания double
         continue;
       }
       while (true)
