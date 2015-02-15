@@ -22,7 +22,7 @@ public class twoStackAlgo
       if (!precedence.containsKey(sign))
       {
         vals.push(Double.parseDouble(sign));
-        //настроить для считывания double
+        //настроить для считывания double ---  сделано
         continue;
       }
       while (true)
