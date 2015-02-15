@@ -33,6 +33,7 @@ public class complexTwoStackAlgo
     boolean check = false;
     for (int i=0;i<len;i++)
     {
+      check = false;
       String sign = array[i];
       if (!precedence.containsKey(sign))
       {
