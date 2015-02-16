@@ -1,7 +1,7 @@
 import java.util.TreeMap;
 public class twoStackAlgo
 {
-  public double evaluation(String text)
+  protected double evaluation(String text)
   {
     text = "("+text+")";
     parser p = new parser();

@@ -2,7 +2,7 @@ import java.util.TreeMap;
 public class complexTwoStackAlgo
 {
 
-  public static Complex complexEvaluation(String text)
+  protected static Complex complexEvaluation(String text)
   {
     Complex val = new Complex(0,0);
     Complex vall = new Complex(0,0);
