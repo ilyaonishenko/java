@@ -49,10 +49,17 @@ public class complexTwoStackAlgo
         String newSign = "";
         for (int j=0;j<sign.length();j++)
         {
+          if (sign.length()==1)
+          {
+            newSign+=1;
+          }
           if (sign.charAt(j)!='i')
             newSign+=sign.charAt(j);
           if (sign.charAt(j)=='i')
-          {}
+          {
+            // сделать чтобы при одиночном i было круто
+            // а именно, чтобы добавлялась единица.
+          }
         }
         sign = newSign;
         newSign = null;
