@@ -28,30 +28,25 @@ public class check
     }
     else
     {
-      System.out.println("Bad");
     }
   }
   public boolean check2(String text)
   {
-    System.out.println("in check2");
     boolean bracket = false;
     boolean answer = true;
     for (int i=0;i<text.length();i++)
       if (text.charAt(i)=='('||text.charAt(i)==')')
         {
-          System.out.println("bracket = true");
           bracket = true;
           break;
         }
     if (text.length()==1||text.length()==0)
     {
-      System.out.println("length 1 or 0");
       answer = false;
       return answer;
     }
     else if (bracket == true)
     {
-      System.out.println("bracket == true");
       int count=0;
       for (int i=0;i<text.length();i++)
       {
@@ -92,7 +87,6 @@ public class check
       }
       else
       {
-        System.out.println("Ops and Vals");
         answer = false;
         return answer;
       }
