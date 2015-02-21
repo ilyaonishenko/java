@@ -7,3 +7,5 @@ now errors\n
 -[] mult for i (must be like 1i);
 
 -[] mb make mult without "*"
+
+-[] mb shows like ints if there are no symbols after dot;
