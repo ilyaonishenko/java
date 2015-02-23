@@ -11,46 +11,101 @@ public class Complex
 
     public String toString()
     {
+        double ree=0,imm=0;
         checkForInts cfi = new checkForInts();
         if (im == 0)
         {
             boolean ex = cfi.check(String.valueOf(re));
             if (ex==true)
                 return (int)re+"";
-            else return re + "";
+            else
+            {
+                ree = java.lang.Math.round(re*1000)/1000.0d;
+                ex = cfi.check(String.valueOf(ree));
+                if (ex == true)
+                    return (int)ree+"";
+                else return ree + "";
+            }
         }
         if (re == 0)
         {
             boolean ex = cfi.check(String.valueOf(im));
             if (ex==true)
                 return (int)im+"i";
-            else return im + "i";
+            else
+            {
+                imm = java.lang.Math.round(im*1000)/1000.d;
+                ex =cfi.check(String.valueOf(imm));
+                if (ex==true)
+                    return (int)imm+"i";
+                else return imm+"i";
+            }
         }
         if (im <  0)
         {
             boolean ex1 = cfi.check(String.valueOf(re));
             boolean ex2 = cfi.check(String.valueOf(im));
             if (ex1==true&&ex2==true)
-                return (int)re+" - "+(int)(-im)+"i";
+                return (int)re+"-"+(int)(-im)+"i";
             if (ex1==true&&ex2==false)
-                return (int)re+" - "+(-im)+"i";
+            {
+                imm = java.lang.Math.round(im*1000)/1000.d;
+                ex2 =cfi.check(String.valueOf(imm));
+                if (ex2==true)
+                    return (int)re+"-"+(int)(-imm)+"i";
+                else return (int)re+"-"+(-imm)+"i";
+            }
             if (ex1==false&&ex2==true)
-                return re+" - "+(int)(-im)+"i";
+            {
+                ree = java.lang.Math.round(re*1000)/1000.d;
+                ex1 =cfi.check(String.valueOf(ree));
+                if (ex1==true)
+                    return (int)ree+"-"+(int)(-im)+"i";
+                else return ree+"-"+(int)(-im)+"i";
+            }
             if (ex1!=true&&ex2!=true)
-                return re + " - " + (-im) + "i";
+            {
+                ree = java.lang.Math.round(re*1000)/1000.d;
+                imm = java.lang.Math.round(im*1000)/1000.d;
+                ex1 = cfi.check(String.valueOf(ree));
+                ex2 = cfi.check(String.valueOf(imm));
+                if (ex1==true&&ex2==true)
+                    return (int)ree+"-"+(int)(-imm)+"i";
+                else return ree + "-" + (-imm) + "i";
+            }
         }
         else
         {
             boolean ex1 = cfi.check(String.valueOf(re));
             boolean ex2 = cfi.check(String.valueOf(im));
             if (ex1==true&&ex2==true)
-                return (int)re+" + "+(int)(im)+"i";
+                return (int)re+"+"+(int)(im)+"i";
             if (ex1==true&&ex2==false)
-                return (int)re+" + "+(im)+"i";
+            {
+                imm = java.lang.Math.round(im*1000)/1000.d;
+                ex2 =cfi.check(String.valueOf(imm));
+                if (ex2==true)
+                    return (int)re+"+"+(int)(imm)+"i";
+                else return (int)re+"+"+(imm)+"i";
+            }
             if (ex1==false&&ex2==true)
-                return re+" + "+(int)(im)+"i";
+            {
+                ree = java.lang.Math.round(re*1000)/1000.d;
+                ex1 =cfi.check(String.valueOf(re));
+                if (ex1==true)
+                    return (int)ree+"+"+(int)(im)+"i";
+                else return ree+"+"+(int)(im)+"i";
+            }
             if (ex1!=true&&ex2!=true)
-                return re + " + " + im + "i";
+            {
+                ree = java.lang.Math.round(re*1000)/1000.d;
+                imm = java.lang.Math.round(im*1000)/1000.d;
+                ex1 = cfi.check(String.valueOf(ree));
+                ex2 = cfi.check(String.valueOf(imm));
+                if (ex1==true&&ex2==true)
+                    return (int)ree+"+"+(int)(imm)+"i";
+                else return ree + "+" + imm + "i";
+            }
         }
         return "";
     }
