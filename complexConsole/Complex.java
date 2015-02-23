@@ -1,50 +1,96 @@
-public class Complex {
+public class Complex
+{
     private final double re;
     private final double im;
 
-    public Complex(double real, double imag) {
+    public Complex(double real, double imag)
+    {
         re = real;
         im = imag;
     }
 
-    public String toString() {
-        if (im == 0) return re + "";
-        if (re == 0) return im + "i";
-        if (im <  0) return re + " - " + (-im) + "i";
-        return re + " + " + im + "i";
+    public String toString()
+    {
+        checkForInts cfi = new checkForInts();
+        if (im == 0)
+        {
+            boolean ex = cfi.check(String.valueOf(re));
+            if (ex==true)
+                return (int)re+"";
+            else return re + "";
+        }
+        if (re == 0)
+        {
+            boolean ex = cfi.check(String.valueOf(im));
+            if (ex==true)
+                return (int)im+"i";
+            else return im + "i";
+        }
+        if (im <  0)
+        {
+            boolean ex1 = cfi.check(String.valueOf(re));
+            boolean ex2 = cfi.check(String.valueOf(im));
+            if (ex1==true&&ex2==true)
+                return (int)re+" - "+(int)(-im)+"i";
+            if (ex1==true&&ex2==false)
+                return (int)re+" - "+(-im)+"i";
+            if (ex1==false&&ex2==true)
+                return re+" - "+(int)(-im)+"i";
+            if (ex1!=true&&ex2!=true)
+                return re + " - " + (-im) + "i";
+        }
+        else
+        {
+            boolean ex1 = cfi.check(String.valueOf(re));
+            boolean ex2 = cfi.check(String.valueOf(im));
+            if (ex1==true&&ex2==true)
+                return (int)re+" + "+(int)(im)+"i";
+            if (ex1==true&&ex2==false)
+                return (int)re+" + "+(im)+"i";
+            if (ex1==false&&ex2==true)
+                return re+" + "+(int)(im)+"i";
+            if (ex1!=true&&ex2!=true)
+                return re + " + " + im + "i";
+        }
+        return "";
     }
 
     public double abs()   { return Math.hypot(re, im); }
     public double phase() { return Math.atan2(im, re); }
 
-    public Complex plus(Complex b) {
+    public Complex plus(Complex b)
+    {
         Complex a = this;
         double real = a.re + b.re;
         double imag = a.im + b.im;
         return new Complex(real, imag);
     }
 
-    public Complex minus(Complex b) {
+    public Complex minus(Complex b)
+    {
         Complex a = this;
         double real = a.re - b.re;
         double imag = a.im - b.im;
         return new Complex(real, imag);
     }
 
-    public Complex times(Complex b) {
+    public Complex times(Complex b)
+    {
         Complex a = this;
         double real = a.re * b.re - a.im * b.im;
         double imag = a.re * b.im + a.im * b.re;
         return new Complex(real, imag);
     }
 
-    public Complex times(double alpha) {
+    public Complex times(double alpha)
+    {
         return new Complex(alpha * re, alpha * im);
     }
 
     public Complex conjugate() {  return new Complex(re, -im); }
 
-    public Complex reciprocal() {
+    public Complex reciprocal()
+    {
         double scale = re*re + im*im;
         return new Complex(re / scale, -im / scale);
     }
@@ -52,52 +98,37 @@ public class Complex {
     public double re() { return re; }
     public double im() { return im; }
 
-    public Complex divides(Complex b) {
+    public Complex divides(Complex b)
+    {
         Complex a = this;
         return a.times(b.reciprocal());
     }
 
-    public Complex exp() {
+    public Complex exp()
+    {
         return new Complex(Math.exp(re) * Math.cos(im), Math.exp(re) * Math.sin(im));
     }
 
-    public Complex sin() {
+    public Complex sin()
+    {
         return new Complex(Math.sin(re) * Math.cosh(im), Math.cos(re) * Math.sinh(im));
     }
 
-    public Complex cos() {
+    public Complex cos()
+    {
         return new Complex(Math.cos(re) * Math.cosh(im), -Math.sin(re) * Math.sinh(im));
     }
 
-    public Complex tan() {
+    public Complex tan()
+    {
         return sin().divides(cos());
     }
 
-    public static Complex plus(Complex a, Complex b) {
+    public static Complex plus(Complex a, Complex b)
+    {
         double real = a.re + b.re;
         double imag = a.im + b.im;
         Complex sum = new Complex(real, imag);
         return sum;
     }
-
-
-    public static void main(String[] args) {
-        Complex a = new Complex(5.0, 6.0);
-        Complex b = new Complex(-3.0, 4.0);
-
-        System.out.println("a            = " + a);
-        System.out.println("b            = " + b);
-        System.out.println("Re(a)        = " + a.re());
-        System.out.println("Im(a)        = " + a.im());
-        System.out.println("b + a        = " + b.plus(a));
-        System.out.println("a - b        = " + a.minus(b));
-        System.out.println("a * b        = " + a.times(b));
-        System.out.println("b * a        = " + b.times(a));
-        System.out.println("a / b        = " + a.divides(b));
-        System.out.println("(a / b) * b  = " + a.divides(b).times(b));
-        System.out.println("conj(a)      = " + a.conjugate());
-        System.out.println("|a|          = " + a.abs());
-        System.out.println("tan(a)       = " + a.tan());
-    }
-
 }

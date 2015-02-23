@@ -49,9 +49,10 @@ public class complexTwoStackAlgo
         String newSign = "";
         for (int j=0;j<sign.length();j++)
         {
-          if (sign.length()==1)
+          if (sign.length()==1&&check==true)
           {
             newSign+=1;
+            System.out.println(array[i]);
           }
           if (sign.charAt(j)!='i')
             newSign+=sign.charAt(j);
