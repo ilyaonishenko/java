@@ -52,7 +52,6 @@ public class complexTwoStackAlgo
           if (sign.length()==1&&check==true)
           {
             newSign+=1;
-            System.out.println(array[i]);
           }
           if (sign.charAt(j)!='i')
             newSign+=sign.charAt(j);
