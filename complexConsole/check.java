@@ -7,9 +7,11 @@ public class check
     {
       twoStackAlgo tsa = new twoStackAlgo();
       complexTwoStackAlgo ctsa = new complexTwoStackAlgo();
+      checkForInts cfi = new checkForInts();
       double answ = 0;
       Complex cansw1 = new Complex(0,0);
       boolean check = false;
+      boolean ex = false;
       for (int i=0;i<text.length();i++)
       {
         if (text.charAt(i)=='i')
@@ -18,7 +20,26 @@ public class check
       if (check == false)
       {
         answ = tsa.evaluation(text);
-        System.out.println(answ);
+        ex = cfi.check(String.valueOf(answ));
+        if (ex == true)
+        {
+          int answe = (int)answ;
+          System.out.println(answe);
+        }
+        else
+        {
+          answ = java.lang.Math.round(answ*1000)/1000.0d;
+          ex = cfi.check(String.valueOf(answ));
+          if (ex == true)
+          {
+            int answe = (int)answ;
+            System.out.println(answe);
+          }
+          else
+          {
+            System.out.println(answ);
+          }
+        }
       }
       else if (check == true)
       {
