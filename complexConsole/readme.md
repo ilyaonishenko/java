@@ -8,4 +8,4 @@ now errors\n
 
 -[] mb make mult without "*"
 
--[] mb shows like ints if there are no symbols after dot;
+-[x] mb shows like ints if there are no symbols after dot;
