@@ -10,18 +10,18 @@ public class Generator
     final static char _w = '§';
     final static char none = '-';
 	Random r = new Random();
-	public Generator(Env env,Wampus wampus,Hunter hunter,Hole hole,int numHole,Gold gold)
+	public Generator(Env env,Wampus wampus,Hunter hunter,Hole hole,Gold gold)
 	{
 		//wampus = new Wampus(3,7,env);
-		wampus = getWampusLocation(wampus,env);
+		/*wampus = getWampusLocation(wampus,env);
 		gold = getGoldLocation(gold,wampus,env);
 		hunter = getHunterLocation(hunter,env);
 		for (int i=0;i<numHole;i++)
 		{
 			hole = getHoleLocation(hole,env);
-		}
+		}*/
 	}
-	private Wampus getWampusLocation(Wampus wampus,Env env)
+	public Wampus getWampusLocation(Wampus wampus,Env env)
 	{
 		int x=0,y=0;
 		while (x==0||x==env.field.length)
@@ -31,7 +31,7 @@ public class Generator
 		//System.out.println("x is "+x+" and y is "+y);
 		return new Wampus(x,y,w,_w,env);
 	}
-	private Gold getGoldLocation(Gold gold,Wampus wampus,Env env)
+	public Gold getGoldLocation(Gold gold,Wampus wampus,Env env)
 	{
 		int x=0,y=0;
 		x = wampus.getX();
@@ -48,7 +48,7 @@ public class Generator
 		System.out.println("x is "+x+" and y is "+y);
 		return new Gold(x,y,g,_g,env);
 	}
-	private Hunter getHunterLocation(Hunter hunter,Env env)
+	public Hunter getHunterLocation(Hunter hunter,Env env)
 	{
 		int x=0,y=0;
 		while (x==0||x==env.field.length)
@@ -57,7 +57,7 @@ public class Generator
 			y = r.nextInt(env.field.length-1);
 		return new Hunter(x,y,h,none,env);
 	}
-	private Hole getHoleLocation(Hole hole,Env env)
+	public Hole getHoleLocation(Hole hole,Env env)
 	{
 		int x=0,y=0;
 		while (x==0||x==env.field.length)
