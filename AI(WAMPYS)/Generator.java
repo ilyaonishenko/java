@@ -36,7 +36,6 @@ public class Generator
 		int x=0,y=0;
 		x = wampus.getX();
 		y = wampus.getY();
-		System.out.println("x is "+x+" and y is "+y);
 		int loc = r.nextInt(3);//0-up,1-right,2 -down,3-left;
 		if (loc == 0)
 			y--;
@@ -45,7 +44,6 @@ public class Generator
 		else if (loc==2)
 			y++;
 		else x--;
-		System.out.println("x is "+x+" and y is "+y);
 		return new Gold(x,y,g,_g,env);
 	}
 	public Hunter getHunterLocation(Hunter hunter,Env env)

@@ -33,4 +33,8 @@ public class Actor
   {
       return y;
   }
+  public void delete(Env env)
+  {
+      env.field[x][y] = none;
+  }
 }

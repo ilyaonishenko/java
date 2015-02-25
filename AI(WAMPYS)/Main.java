@@ -20,9 +20,11 @@ public class Main
         int y = hunter.getY();
         System.out.println("x is "+x);
         System.out.println("y is "+y);
-        hunter.moveUp();
+        hunter = hunter.moveUp(hunter,env);
         System.out.println("Two");
         env.Print();
+        x = hunter.getX();
+        y = hunter.getY();
         System.out.println("x is "+x);
         System.out.println("y is "+y);
     }
