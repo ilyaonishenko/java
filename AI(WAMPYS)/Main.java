@@ -16,16 +16,13 @@ public class Main
         gold = gen.getGoldLocation(gold,wampus,env);
         System.out.println("One");
         env.Print();
-        int x = hunter.getX();
-        int y = hunter.getY();
-        System.out.println("x is "+x);
-        System.out.println("y is "+y);
         hunter = hunter.moveUp(hunter,env);
         System.out.println("Two");
         env.Print();
-        x = hunter.getX();
-        y = hunter.getY();
-        System.out.println("x is "+x);
-        System.out.println("y is "+y);
+        char[] arr = hunter.read(env);
+        for (int i=0;i<arr.length;i++)
+        {
+            System.out.println(arr[i]);
+        }
     }
 }
