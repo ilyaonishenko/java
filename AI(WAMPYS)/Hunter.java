@@ -1,8 +1,7 @@
 public class Hunter extends Ccharacter
 {
-  public Hunter(int x,int y,Env env)
+  public Hunter(int x,int y,char id,char show,Env env)
   {
-    super (x,y,env);
-    env.field[x][y] = 'h';
+    super (x,y,id,show,env);
   }
 }

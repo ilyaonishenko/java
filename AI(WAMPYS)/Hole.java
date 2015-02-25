@@ -1,8 +1,7 @@
-public class Hole
+public class Hole extends Actor
 {
-  public Hole(int x,int y,Env env)
-  {
-    super(x,y,env);
-    env.field[x][y] = '±';
-  }
+    public Hole(int x,int y,char id,char show,Env env)
+    {
+        super(x,y,id,show,env);
+    }
 }

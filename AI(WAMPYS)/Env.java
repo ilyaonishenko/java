@@ -11,12 +11,12 @@ public class Env
   }
   public void init()
   {
-    field = new Character[size_y][size_x];
+    field = new Character[size_x][size_y];
     for (int i=0;i<size_y;i++)
     {
       for (int j=0;j<size_x;j++)
       {
-        field[i][j] = '-';
+        field[j][i] = '-';
       }
     }
   }
@@ -26,7 +26,7 @@ public class Env
     {
       for (int j=0;j<size_x;j++)
       {
-        System.out.print(field[i][j]+" ");
+        System.out.print(field[j][i]+" ");
       }
       System.out.print("\n");
     }
