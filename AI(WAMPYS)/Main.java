@@ -1,3 +1,4 @@
+import java.util.HashMap;
 public class Main
 {
     final static char none = '-';
@@ -14,7 +15,8 @@ public class Main
         hunter = gen.getHunterLocation(hunter,env);
         hole = gen.getHoleLocation(hole,env);
         gold = gen.getGoldLocation(gold,wampus,env);
-        System.out.println("One");
+        HashMap<Integer,Character> map = new HashMap<Integer,Character>();
+        /*System.out.println("One");
         env.Print();
         hunter = hunter.moveUp(hunter,env);
         System.out.println("Two");
@@ -23,6 +25,13 @@ public class Main
         for (int i=0;i<arr.length;i++)
         {
             System.out.println(arr[i]);
+        }*/
+        for (int i=0;i<10;i++)
+        {
+            System.out.println(i);
+            env.Print();
+            map = hunter.read(env);
+            hunter = hunter.understand(hunter,env,map);
         }
     }
 }
