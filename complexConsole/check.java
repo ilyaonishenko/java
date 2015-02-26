@@ -76,7 +76,7 @@ public class check
         if (text.charAt(i)==')')
           count++;
       }
-      if (count==2)
+      if (count%2==0)
         answer = true;
       else
         answer = false;
