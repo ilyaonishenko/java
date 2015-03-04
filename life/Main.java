@@ -27,20 +27,32 @@ public class Main
 		System.out.println("H for herbivore");
 		HashMap<Integer,Character> map1 = new HashMap<Integer,Character>();
 		HashMap<Integer,Character> map2 = new HashMap<Integer,Character>();
-		System.out.println("ID "+predator.getID());
+		/*System.out.println("ID "+predator.getID());
 		predator.setID('Q');
 		System.out.println("ID "+predator.getID());
 		predator = predator.moveDown(predator);
-		System.out.println("ID "+predator.getID());
+		System.out.println("ID "+predator.getID());*/
+		/*System.out.println("ID+ "+herbivore.getID());
+		herbivore.setID('Q');
+		System.out.println("ID "+herbivore.getID());
+		herbivore = herbivore.moveUp(herbivore);
+		System.out.println("ID "+herbivore.getID());*/
         for (int i=0;i<10;i++)
         {
             System.out.println(i);
             Env.Print();
-			map2 = herbivore.read();
-			herbivore = herbivore.understand(herbivore,map2);
-            map1 = predator.read();
-            predator = predator.understand(predator,map1,herbivore);
-			System.out.println("Energy: "+predator.getEnergy());
+			if (herbivore.isDead()!=true)
+			{
+				map2 = herbivore.read();
+				herbivore = herbivore.understand(herbivore,map2);
+			}
+			if (predator.isDead()!=true)
+			{
+            	map1 = predator.read();
+            	predator = predator.understand(predator,map1,herbivore);
+			}
+			System.out.println("Predator energy: "+predator.getEnergy());
+			System.out.println("Herbivore energy: "+herbivore.getEnergy());
         }
 	}
 }

@@ -1,4 +1,4 @@
 public interface LifeBehavior
 {
-	public boolean isAlive();
+	public boolean live();
 }

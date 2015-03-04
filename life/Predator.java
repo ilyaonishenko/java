@@ -11,7 +11,7 @@ public class Predator extends Animal
 	{
 		super(x,y,id,show);
 		eatBehavior = new EatHerbivore();
-		lifeBehavior = new IsAlive();
+		lifeBehavior = new Is_Alive();
 		this.x= x;
 		this.y=y;
 		this.id=id;
@@ -22,48 +22,56 @@ public class Predator extends Animal
 	}
 	public boolean performLife()
 	{
-		return lifeBehavior.isAlive();
+		return lifeBehavior.live();
 	}
 	public Predator moveUp(Predator predator)
 	{
-		this.y--;
+		//this.y--;
 		predator.delete();
+		predator.setY(this.y--);
 		_energy = predator.getEnergy()-1;
-		predator = new Predator(x,y,id,show);
+		//predator = new Predator(x,y,id,show);
 		predator.setEnergy(_energy);
+		predator.reInit();
 		return predator;
 	}
 	public Predator moveDown(Predator predator)
 	{
-		this.y++;
+		//this.y++;
 		predator.delete();
+		predator.setY(this.y++);
 		_energy = predator.getEnergy()-1;
-		predator = new Predator(x,y,id,show);
 		predator.setEnergy(_energy);
+		predator.reInit();
 		return predator;
 	}
 	public Predator moveRight(Predator predator)
 	{
-		this.x++;
+		//this.x++;
 		predator.delete();
+		predator.setX(this.x++);
 		_energy = predator.getEnergy()-1;
-		predator = new Predator(x,y,id,show);
+		//predator = new Predator(x,y,id,show);
 		predator.setEnergy(_energy);
+		predator.reInit();
 		return predator;
 	}
 	public Predator moveLeft(Predator predator)
 	{
-		this.x--;
+		//this.x--;
 		predator.delete();
+		predator.setX(this.x--);
 		_energy = predator.getEnergy()-1;
-		predator = new Predator(x,y,id,show);
+		//predator = new Predator(x,y,id,show);
 		predator.setEnergy(_energy);
+		predator.reInit();
 		return predator;
 	}
 	public Predator understand(Predator predator,HashMap map,Herbivore herb)
     {
         if (predator.getBefore()=='H')
         {
+			System.out.println(predator.getBefore());
             System.out.println("YOU WIN P");
 			predator.performEating(predator,herb);
         }

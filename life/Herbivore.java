@@ -10,49 +10,60 @@ public class Herbivore extends Animal
 	public Herbivore(int x,int y,char id,char show)
 	{
 		super(x,y,id,show);
-		eatBehavior = new EatPlant();
+//		eatBehavior = new EatPlant();
 		this.x= x;
 		this.y=y;
 		this.id=id;
 	}
-	public void performEating()
+	/*public void performEating()
 	{
 		eatBehavior.Eat();
-	}
+	}*/
 	public Herbivore moveUp(Herbivore herb)
 	{
-		this.y--;
+		//this.y--;
 		herb.delete();
+		herb.setY(this.y--);
 		_energy = herb.getEnergy()-1;
-		herb = new Herbivore(x,y,id,show);
+		//herb = new Herbivore(x,y,id,show);
 		herb.setEnergy(_energy);
+		herb.reInit();
 		return herb;
 	}
 	public Herbivore moveDown(Herbivore herb)
 	{
-		this.y++;
+		//this.y++;
 		herb.delete();
+		herb.setY(this.y++);
+		//herb.delete();
 		_energy = herb.getEnergy()-1;
-		herb = new Herbivore(x,y,id,show);
+		//herb = new Herbivore(x,y,id,show);
 		herb.setEnergy(_energy);
+		herb.reInit();
 		return herb;
 	}
 	public Herbivore moveRight(Herbivore herb)
 	{
-		this.x++;
+		//this.x++;
 		herb.delete();
+		herb.setX(this.x++);
+		//herb.delete();
 		_energy = herb.getEnergy()-1;
-		herb = new Herbivore(x,y,id,show);
+		//herb = new Herbivore(x,y,id,show);
 		herb.setEnergy(_energy);
+		herb.reInit();
 		return herb;
 	}
 	public Herbivore moveLeft(Herbivore herb)
 	{
-		this.x--;
+		//this.x--;
 		herb.delete();
+		herb.setX(this.x--);
+		//herb.delete();
 		_energy = herb.getEnergy()-1;
-		herb = new Herbivore(x,y,id,show);
+		//herb = new Herbivore(x,y,id,show);
 		herb.setEnergy(_energy);
+		herb.reInit();
 		return herb;
 	}
 	public Herbivore understand(Herbivore herb,HashMap map)

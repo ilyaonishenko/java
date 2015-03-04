@@ -5,6 +5,9 @@ public abstract class Actor
 	private char none = '-';
 	final private int max = 100;
 	private int energy = max;
+	private int last_x = x;
+	private int last_y = y;
+	private boolean dead = false;
 	public Actor(int x,int y,char id,char show)
 	{
 		this.x = x;
@@ -26,6 +29,18 @@ public abstract class Actor
 			if (Env.field[x][y-1]==none)
 				Env.field[x][y-1]=show;
 	}
+	public void reInit()
+	{
+		try
+		{
+			before = Env.field[x][y];
+			Env.field[x][y]=id;
+		}
+		catch (java.lang.ArrayIndexOutOfBoundsException e)
+		{
+
+		}
+	}
 	public int getX()
 	{
 		return this.x;
@@ -36,7 +51,15 @@ public abstract class Actor
 	}
 	public void delete()
 	{
+		try
+		{
 		Env.field[x][y] = before;
+		System.out.println("before "+before);
+		}
+		catch (java.lang.ArrayIndexOutOfBoundsException e)
+		{
+
+		}
 	}
 	public char getBefore()
 	{
@@ -71,7 +94,31 @@ public abstract class Actor
 	}
 	public void setID(char newID)
 	{
-		Actor = null;
 		this.id = newID;
+	}
+	public void setX(int x)
+	{
+		last_x = x;
+		this.x = x;
+	}
+	public void setY(int y)
+	{
+		last_y=y;
+		this.y = y;
+	}
+	public void dead()
+	{
+		System.out.println("it's dead");
+		Env.field[x][y]=none;
+		this.id = none;
+		this.y = 1;
+		this.x = 1;
+		//this.energy = 0;
+		before = none;
+		dead = true;
+	}
+	public boolean isDead()
+	{
+		return dead;
 	}
 }
