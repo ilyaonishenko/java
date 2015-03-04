@@ -1,4 +1,4 @@
 public interface EatBehavior
 {
-	public void Eat();
+	public void Eat(Predator predator,Herbivore herb);
 }

@@ -1,7 +1,10 @@
 public class EatHerbivore implements EatBehavior
 {
-	public void Eat()
+	final static char none = '-';
+	public void Eat(Predator predator,Herbivore herb)
 	{
-		System.out.println("I'm eating Herbivore");
+		predator.setEnergy(herb.getEnergy());
+		herb.setID(none);
+		System.out.println("set");
 	}
 }

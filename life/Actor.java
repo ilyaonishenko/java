@@ -3,7 +3,8 @@ public abstract class Actor
 	private int x,y;
 	private char id,show,before;
 	private char none = '-';
-	private int energy = 100;
+	final private int max = 100;
+	private int energy = max;
 	public Actor(int x,int y,char id,char show)
 	{
 		this.x = x;
@@ -44,5 +45,33 @@ public abstract class Actor
 	public int getEnergy()
 	{
 		return energy;
+	}
+	public boolean checkEnergy()
+	{
+		if (this.energy==0)
+			return true;
+		else return false;
+	}
+	public Actor KMP()
+	{
+		return null;
+	}
+	public void setEnergy(int newEnergy)
+	{
+		energy = newEnergy;
+		if (energy==0)
+		{
+			System.out.println("You are dead");
+			this.id = none;
+		}
+	}
+	public char getID()
+	{
+		return this.id;
+	}
+	public void setID(char newID)
+	{
+		Actor = null;
+		this.id = newID;
 	}
 }
