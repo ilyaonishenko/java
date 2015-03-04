@@ -8,6 +8,13 @@ public class Main
     Scanner sc = new Scanner(System.in);
     System.out.println("Введите выражение");
     String text = sc.next();
-    ch.check(text);
+    try
+    {
+        ch.check(text);
+    }
+    catch(java.lang.NumberFormatException e)
+    {
+        System.out.println("Ooops");
+    }
   }
 }
