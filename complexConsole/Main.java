@@ -6,6 +6,7 @@ public class Main
   {
     check ch = new check();
     Scanner sc = new Scanner(System.in);
+    parser parser = new parser();
     System.out.println("Введите выражение");
     String text = sc.next();
     try

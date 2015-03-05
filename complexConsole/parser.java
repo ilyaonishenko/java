@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class parser
 {
-  protected String[] parser(String text)
+  public String[] parser(String text)
   {
     String[] sep = new String[]{"(",")","+","-","*","/"};
     String[] array =  text.split("[+\\s\\-\\*\\/\\(\\)]");
