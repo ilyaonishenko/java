@@ -10,6 +10,7 @@ public class Actor
 		this.x = x;
 		this.y = y;
 		this.id = id;
+		this.energy = max;
 		refresh();
 	}
 	public void setX(int x)
