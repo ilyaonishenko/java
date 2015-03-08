@@ -2,6 +2,7 @@ import java.util.Random;
 public class Animal extends Actor
 {
 	Random r = new Random();
+	EatBehavior eatBehavior;
 	int z,lastZ=-1,oppositeZ=-1;;
 	public Animal (char id,int x,int y)
 	{
@@ -17,7 +18,7 @@ public class Animal extends Actor
 		setY(getY()-1);
 		setEnetgy(getEnergy()-1);
 		refresh();
-		info();
+		//info();
 	}
 	public void moveDown()
 	{
@@ -25,7 +26,7 @@ public class Animal extends Actor
 		setY(getY()+1);
 		setEnetgy(getEnergy()-1);
 		refresh();
-		info();
+	//	info();
 	}
 	public void moveLeft()
 	{
@@ -33,7 +34,7 @@ public class Animal extends Actor
 		setX(getX()-1);
 		setEnetgy(getEnergy()-1);
 		refresh();
-		info();
+	//	info();
 	}
 	public void moveRight()
 	{
@@ -41,7 +42,7 @@ public class Animal extends Actor
 		setX(getX()+1);
 		setEnetgy(getEnergy()-1);
 		refresh();
-		info();
+	//	info();
 	}
 	public char[] sight()
 	{
@@ -149,7 +150,47 @@ public class Animal extends Actor
 			}
 		}
 	}
-	public void thinking(char lookId)
+	public void thinking(char lookId,Animal animal)
+	{
+		if (getBefore()==lookId){
+			System.out.println("i found!");
+			performEating(animal);
+		}
+		char[] locs = sight();
+		boolean check = false;
+		for (int i=0;i<locs.length;i++)
+		{
+			if (locs[i]!='n'){
+				if (locs[i]==lookId)
+				{
+					if (i==0){
+						moveUp();
+						check = true;
+					}
+					else if (i==1){
+						moveRight();
+						check = true;
+					}
+					else if (i==2){
+						moveDown();
+						check = true;
+					}
+					else if (i==3){
+						moveLeft();
+						check = true;
+					}
+				}
+			}
+		}
+		if (getBefore()==lookId){
+			System.out.println("i found!");
+			performEating(animal);
+		}
+		if (check == false){
+			randomMove();
+		}
+	}
+	public void thinking(char lookId,Plant plant)
 	{
 		char[] locs = sight();
 		boolean check = false;
@@ -177,8 +218,27 @@ public class Animal extends Actor
 				}
 			}
 		}
+		if (getID()==lookId){
+			performEating(plant);
+		}
 		if (check == false){
 			randomMove();
 		}
+	}
+	public void performEating(Animal animal)
+	{
+		//eatBehavior.Eat(animal);
+		addEnergy(animal.getEnergy());
+		animal = null;
+		refresh();
+		setID('X');
+		setBefore('-');
+	}
+	public void performEating(Plant plant){
+		addEnergy(plant.getEnergy());
+		plant = null;
+		refresh();
+		setID('h');
+		setBefore('-');
 	}
 }

@@ -45,6 +45,9 @@ public class Actor
 	{
 		return before;
 	}
+	public void setBefore(char before){
+		this.before = before;
+	}
 	public void setID(char id)
 	{
 		this.id = id;

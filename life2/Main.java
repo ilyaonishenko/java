@@ -5,19 +5,19 @@ public class Main
 	private static final char h = 'h';
 	public static void main(String[] args)
 	{
-		Env.getEnv(10);
-		Predator predator = new Predator(pr,8,8);
-		Herbivore herbivore = new Herbivore(h,5,5);
-		Plant plant = new Plant(p,3,3);
+		Env.getEnv(5);
+		Predator predator = new Predator(pr,3,3);
+		Herbivore herbivore = new Herbivore(h,1,1);
+		Plant plant = new Plant(p,4,4);
 		System.out.println("-------------one-----------");
 		Env.Print();
 		for (int i=0;i<10;i++)
 		{
 			System.out.println(i);
-			predator.sight();
 			herbivore.sight();
-			predator.thinking(h);
+			predator.sight();
 			herbivore.thinking(p);
+			predator.thinking(h,herbivore);
 			Env.Print();
 		}
 	}
