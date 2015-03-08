@@ -16,7 +16,7 @@ public class Main
 			System.out.println(i);
 			herbivore.sight();
 			predator.sight();
-			herbivore.thinking(p);
+			herbivore.thinking(p,plant);
 			predator.thinking(h,herbivore);
 			Env.Print();
 		}
