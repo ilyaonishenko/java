@@ -1,6 +1,8 @@
-import java.util.Random();
+import java.util.Random;
 public class Animal extends Actor
 {
+	Random r = new Random();
+	int z,lastZ=-1,oppositeZ=-1;;
 	public Animal (char id,int x,int y)
 	{
 		super(id,x,y);
@@ -50,46 +52,133 @@ public class Animal extends Actor
 		3 for lefts
 		*/
 		char[] locs = new char[4];
+		try{
 		locs[0] = Env.field[getX()][getY()-1];
+	}catch (ArrayIndexOutOfBoundsException e){
+		locs[0] = 'n';
+	}
+	try{
 		locs[1] = Env.field[getX()+1][getY()];
+	}catch(ArrayIndexOutOfBoundsException e)
+	{
+		locs[1]= 'n';
+	}
+	try{
 		locs[2] = Env.field[getX()][getY()+1];
+	}catch(ArrayIndexOutOfBoundsException e){
+		locs[2] = 'n';
+	}
+	try{
 		locs[3] = Env.field[getX()-1][getY()];
+	}catch(ArrayIndexOutOfBoundsException e){
+		locs[3] = 'n';
+	}
 		return locs;
+	}
+	public void randomMove()
+	{
+		z = r.nextInt(4);
+		switch(z){
+			case 0:{
+				if (z==lastZ||z==oppositeZ){
+					randomMove();
+					break;
+				}
+				else {
+					if (getY()-1<0){
+						randomMove();
+						break;
+					} else {
+						moveUp();
+						lastZ = z;
+						oppositeZ = 2;
+					}
+				}
+				break;
+			}
+			case 1:{
+				if (z==lastZ||z==oppositeZ){
+					randomMove();
+					break;
+				}
+				else{
+					if (getX()+1>Env.getSize()-1){
+						randomMove();
+						break;
+					} else {
+						moveRight();
+						lastZ = z;
+						oppositeZ = 3;
+					}
+				}
+				break;
+			}
+			case 2:{
+				if (z==lastZ||z==oppositeZ){
+					randomMove();
+					break;
+				}
+				else{
+					if(getY()+1>Env.getSize()-1){
+						randomMove();
+						break;
+					} else {
+						moveDown();
+						lastZ = z;
+						oppositeZ = 0;
+					}
+				}
+				break;
+			}
+			case 3:{
+				if (z==lastZ||z==oppositeZ){
+					randomMove();
+					break;
+				}
+				else{
+					if(getX()-1<0){
+						randomMove();
+						break;
+					} else {
+						moveLeft();
+						lastZ = z;
+						oppositeZ = 1;
+					}
+				}
+				break;
+			}
+		}
 	}
 	public void thinking(char lookId)
 	{
-		Random r = new Random();
 		char[] locs = sight();
+		boolean check = false;
 		for (int i=0;i<locs.length;i++)
 		{
-			try {
+			if (locs[i]!='n'){
 				if (locs[i]==lookId)
 				{
 					if (i==0){
 						moveUp();
+						check = true;
 					}
 					else if (i==1){
 						moveRight();
+						check = true;
 					}
 					else if (i==2){
 						moveDown();
+						check = true;
 					}
 					else if (i==3){
 						moveLeft();
-					}
-					else {
-						outer:
-						int z = r.nextInt(3);
-						if(z==0&&getY()-1<0){
-							throw new moveException();
-						}
-						else if (z==0)
+						check = true;
 					}
 				}
-			}catch(moveException ex)
-			{
-
 			}
+		}
+		if (check == false){
+			randomMove();
 		}
 	}
 }

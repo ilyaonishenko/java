@@ -11,12 +11,14 @@ public class Main
 		Plant plant = new Plant(p,3,3);
 		System.out.println("-------------one-----------");
 		Env.Print();
-		predator.info();
-		predator.moveUp();
-		predator.moveLeft();
-		predator.moveDown();
-		System.out.println("-------------two-----------");
-		Env.Print();
-		predator.info();
+		for (int i=0;i<10;i++)
+		{
+			System.out.println(i);
+			predator.sight();
+			herbivore.sight();
+			predator.thinking(h);
+			herbivore.thinking(p);
+			Env.Print();
+		}
 	}
 }

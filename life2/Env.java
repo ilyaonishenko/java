@@ -30,4 +30,8 @@ public class Env
 			System.out.print("\n");
 		}
 	}
+	public static int getSize()
+	{
+		return size;
+	}
 }
