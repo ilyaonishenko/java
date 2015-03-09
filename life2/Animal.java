@@ -150,11 +150,13 @@ public class Animal extends Actor
 			}
 		}
 	}
-	public void thinking(char lookId,Animal animal)
+	public void thinking(char lookId)
 	{
+		boolean done = false;
 		if (getBefore()==lookId){
 			System.out.println("i found!");
-			performEating(animal);
+			performEating(lookId);
+			done = true;
 		}
 		char[] locs = sight();
 		boolean check = false;
@@ -182,15 +184,39 @@ public class Animal extends Actor
 				}
 			}
 		}
-		if (getBefore()==lookId){
+		if (getBefore()==lookId&&done==false){
 			System.out.println("i found!");
-			performEating(animal);
+			performEating(lookId);
+		}
+		if (getBefore()=='P'&&lookId!='P'){
+			System.out.println("Flower");
+			setBefore('-');
+			setID('-');
+			refresh();
 		}
 		if (check == false){
 			randomMove();
 		}
 	}
-	public void thinking(char lookId,Plant plant)
+	public void born(char lookId){
+		if (lookId=='P'){
+			if (getEnergy()>100){
+				Herbivore herb = new Herbivore('h',getX(),getY());
+				//Generator.getLocation(herb);
+				Main.herbivoresList.add(herb);
+				addEnergy(-100);
+			}
+		}
+		if (lookId=='h'){
+			if(getEnergy()>100){
+				Predator pred = new Predator('X',getX(),getY());
+				//Generator.getLocation(pred);
+				Main.predatorsList.add(pred);
+				addEnergy(-100);
+			}
+		}
+	}
+/*	public void thinking(char lookId)
 	{
 		char[] locs = sight();
 		boolean check = false;
@@ -219,26 +245,49 @@ public class Animal extends Actor
 			}
 		}
 		if (getID()==lookId){
-			performEating(plant);
+			performEating();
 		}
 		if (check == false){
 			randomMove();
 		}
-	}
-	public void performEating(Animal animal)
+	}*/
+	public void performEating(char lookId)
 	{
-		//eatBehavior.Eat(animal);
-		addEnergy(animal.getEnergy());
-		animal = null;
+		//eatBehavior.Eat();
+		if (lookId=='h'){
+			for (Herbivore h:Main.herbivoresList){
+				if (h.getX()==getX()&&h.getY()==getY()){
+					addEnergy(h.getEnergy());
+					refresh();
+					Main.herbivoresList.remove(h);
+					setID('X');
+					setBefore('-');
+				}
+			}
+		}
+		else if (lookId=='P'){
+			for (Plant p:Main.plantsList){
+				if (p.getX()==getX()&&p.getY()==getY()){
+					addEnergy(p.getEnergy());
+					refresh();
+					Main.plantsList.remove(p);
+					setID('h');
+					setBefore('-');
+				}
+			}
+		}
+	/*	addEnergy(animal.getEnergy());
+		animal.setID('-');
 		refresh();
+		animal.check();
 		setID('X');
-		setBefore('-');
+		setBefore('-');*/
 	}
-	public void performEating(Plant plant){
-		addEnergy(plant.getEnergy());
-		plant = null;
+	/*public void performEating(){
+		/*addEnergy(plant.getEnergy());
+		//plant.set();
 		refresh();
 		setID('h');
-		setBefore('-');
-	}
+		setBefore('-');*/
+	//}
 }

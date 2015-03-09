@@ -1,6 +1,6 @@
-public class EatHerbivore implements EatBehavior{
+public class EatHerbivore{
 	final char none = '-';
-	public void Eat(Animal animal){
-		setEnergy(getEnergy()+animal.getEnergy());
+	public void Eat(){
+
 	}
 }

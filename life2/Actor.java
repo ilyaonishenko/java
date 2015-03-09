@@ -60,6 +60,24 @@ public class Actor
 	{
 		return dead;
 	}
+	public void death()
+	{
+		id = none;
+		this.x=0;
+		this.y=0;
+		this.dead = true;
+		this.energy = 0;
+	}
+	public void check()
+	{
+		if (this.energy<=0)
+			death();
+	}
+	public boolean readyfor(){
+		if (this.energy>max)
+			return true;
+		else return false;
+	}
 	public void refresh()
 	{
 		this.before = Env.field[x][y];
@@ -67,14 +85,19 @@ public class Actor
 	}
 	public void clear()
 	{
+		if (before!='P'){
+			before = none;
+		}
 		Env.field[x][y] = before;
 	}
 	public void info()
 	{
+		System.out.println("------------------------");
 		System.out.println("id: "+this.id);
 		System.out.println("x: "+this.x);
 		System.out.println("y: "+this.y);
 		System.out.println("energy: "+this.energy);
 		System.out.println("before: "+this.before);
+		System.out.println("------------------------");
 	}
 }

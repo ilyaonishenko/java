@@ -5,8 +5,4 @@ public class Predator extends Animal
 		super(id,x,y);
 		eatBehavior = new EatHerbivore();
 	}
-	public void performEating(Herbivore herb)
-	{
-		eatBehavior.Eat(herb);
-	}
 }
