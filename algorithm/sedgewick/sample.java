@@ -1,5 +1,5 @@
 import java.util.Iterator;
-public class queue<Item>
+/*public class queue<Item>
 {
   public int rank(int key,int[] a)
   {
@@ -7,7 +7,7 @@ public class queue<Item>
     int hi = a.lenght-1;
     while (lo<hi)
     {
-      int mid = lo+(hi-lo)/2
+      int mid = lo+(hi-lo)/2;
       if (key<a[mid])
         hi = mid-1;
       else if (key>a[mid])
@@ -70,7 +70,7 @@ public class queue<Item>
       return item;
     }
   }
-}
+}*/
 public class sample<Item>
 {
   private class Node
@@ -123,13 +123,15 @@ public class sample<Item>
   }
   public static void main (String[] args)
   {
-    sample<String> stack = new sample<String>();
+    /*sample<String> stack = new sample<String>();
     stack.push("hello");
     stack.push("Mr.");
     stack.push("robinson");
     for (int i=0;i<stack.size();i++)
     {
       System.out.println(stack);
-    }
+    }*/
+    boolean check = 4%2==0;
+    System.out.println(check);
   }
 }
