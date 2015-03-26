@@ -30,7 +30,7 @@ public class HashSet{
 	int hash(int x){
 		return (x>>15)^x;
 	}
-	int index(int x){
+	int index(int hash){
 		return Math.abs(hash)%headNum;
 	}
 }
