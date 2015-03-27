@@ -1,4 +1,4 @@
-public class MergeSort{
+public class AIPMerge{
 	public statico void merge(int[] a,int lo,int mid,int hi){
 		int i = lo;
 		int j = mid+1;
@@ -17,4 +17,6 @@ public class MergeSort{
 	public static boolean less(int v,int w){
 		return v<w;
 	}
-}
+	public static void main(Strin[] args){
+		int[] array = new array[7];
+	}
