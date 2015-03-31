@@ -10,9 +10,11 @@ public class Main{
 	public static List<Predator> predatorsList = new LinkedList<Predator>();
 	public static List<Herbivore> herbivoresList = new LinkedList<Herbivore>();
 	public static List<Plant> plantsList = new LinkedList<Plant>();
+	public static char[] toPrint;
 	public static void main(String[] args)
 	{
 		int N=10;
+		toPrint = new char[100];
 		int width = 110*N, height = 90*N;
 		myFrame mainFrame = new myFrame("Hello SWING!!!");
 		mainFrame.setSize(width, height);
@@ -42,8 +44,9 @@ public class Main{
 			Generator.getLocation(h);
 		for (Plant p:plantsList)
 			Generator.getLocation(p);
-		/*
+		mainFrame.changeBackground(toPrint);
 		Env.Print();
+		/*
 		for (int i=0;i<10;i++)
 		{
 			System.out.println(i);

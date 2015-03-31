@@ -1,5 +1,6 @@
 public class Env
 {
+	//sadasdas
 	private static Env env;
 	private static int size;
 	public static char field[][];
