@@ -2,6 +2,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;
 import javax.swing.*;
+import java.lang.Thread;
 public class Main{
 	private static final char pr = 'X';
 	private static final char p = 'P';
@@ -14,6 +15,7 @@ public class Main{
 	public static void main(String[] args)
 	{
 		int N=10;
+		Thread thread = new Thread();
 		toPrint = new char[100];
 		int width = 110*N, height = 90*N;
 		myFrame mainFrame = new myFrame("Hello SWING!!!");
@@ -46,7 +48,6 @@ public class Main{
 			Generator.getLocation(p);
 		mainFrame.changeBackground(toPrint);
 		Env.Print();
-		/*
 		for (int i=0;i<10;i++)
 		{
 			System.out.println(i);
@@ -72,6 +73,12 @@ public class Main{
 				if (he.isDead()==false){
 					he.thinking(p);
 				}
+			}
+			mainFrame.changeBackground(toPrint);
+			try{
+				thread.sleep(500);
+			} catch(Exception e){
+
 			}
 			for(Predator p:predatorsList){
 				if (p.isDead()==false){
@@ -110,8 +117,14 @@ public class Main{
 				}
 			}
 			bigCheck();
+			mainFrame.changeBackground(toPrint);
+			try{
+				thread.sleep(500);
+			} catch(Exception e){
+
+			}
 			Env.Print();
-		}*/
+		}
 	}
 	public static void bigCheck(){
 		boolean check=false;
