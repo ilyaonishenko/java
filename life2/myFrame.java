@@ -66,7 +66,7 @@ public class myFrame extends JFrame{
 		JLabel jLabel;
 		for(int i=0;i<100;i++){
 			if (array[i]==p){
-				icon = new ImageIcon("pic/plant.png");
+				icon = new ImageIcon("pic/plant2.png");
 				icon = resizeImage(WIDTH,HEIGHT,icon);
 				jLabel = new JLabel(icon);
 				System.out.println("Hello1");
@@ -80,14 +80,14 @@ public class myFrame extends JFrame{
 				add(jLabel);
 			}
 			else if (array[i]==pr){
-				icon = new ImageIcon("pic/predator.png");
+				icon = new ImageIcon("pic/predator2.png");
 				icon = resizeImage(WIDTH,HEIGHT,icon);
 				jLabel = new JLabel(icon);
 				System.out.println("Hello3");
 				add(jLabel);
 			}
 			else if (array[i]==h){
-				icon = new ImageIcon("pic/herbivore.png");
+				icon = new ImageIcon("pic/herbivore2.png");
 				icon = resizeImage(WIDTH,HEIGHT,icon);
 				jLabel = new JLabel(icon);
 				System.out.println("Hello4");
