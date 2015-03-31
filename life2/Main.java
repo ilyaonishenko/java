@@ -1,7 +1,8 @@
 import java.util.LinkedList;
 import java.util.List;
-public class Main
-{
+import java.awt.*;
+import javax.swing.*;
+public class Main{
 	private static final char pr = 'X';
 	private static final char p = 'P';
 	private static final char h = 'h';
@@ -11,7 +12,13 @@ public class Main
 	public static List<Plant> plantsList = new LinkedList<Plant>();
 	public static void main(String[] args)
 	{
-		Env.getEnv(10);
+		int N=10;
+		int width = 110*N, height = 90*N;
+		myFrame mainFrame = new myFrame("Hello SWING!!!");
+		mainFrame.setSize(width, height);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setVisible(true);
+		Env.getEnv(N);
 		Predator predator = new Predator(none,0,0);
 		Predator predator2 = new Predator(none,0,0);
 		predatorsList.add(predator);
@@ -35,7 +42,7 @@ public class Main
 			Generator.getLocation(h);
 		for (Plant p:plantsList)
 			Generator.getLocation(p);
-		System.out.println("-------------one-----------");
+		/*
 		Env.Print();
 		for (int i=0;i<10;i++)
 		{
@@ -101,7 +108,7 @@ public class Main
 			}
 			bigCheck();
 			Env.Print();
-		}
+		}*/
 	}
 	public static void bigCheck(){
 		boolean check=false;
