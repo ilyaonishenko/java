@@ -11,17 +11,13 @@ public class Main{
 	public static List<Predator> predatorsList = new LinkedList<Predator>();
 	public static List<Herbivore> herbivoresList = new LinkedList<Herbivore>();
 	public static List<Plant> plantsList = new LinkedList<Plant>();
-	public static char[] toPrint;
+	public static char[][] toPrint;
 	public static void main(String[] args)
 	{
 		int N=10;
 		Thread thread = new Thread();
-		toPrint = new char[100];
+		toPrint = new char[10][10];
 		int width = 110*N, height = 90*N;
-		myFrame mainFrame = new myFrame("Hello SWING!!!");
-		mainFrame.setSize(width, height);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setVisible(true);
 		Env.getEnv(N);
 		Predator predator = new Predator(none,0,0);
 		Predator predator2 = new Predator(none,0,0);
@@ -46,7 +42,11 @@ public class Main{
 			Generator.getLocation(h);
 		for (Plant p:plantsList)
 			Generator.getLocation(p);
-		mainFrame.changeBackground(toPrint);
+		/*myFrame mainFrame = new myFrame("Hello SWING!!!",toPrint);
+		mainFrame.setSize(width, height);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setVisible(true);*/
+		//mainFrame.changeBackground(toPrint);
 		Env.Print();
 		for (int i=0;i<10;i++)
 		{
@@ -74,12 +74,12 @@ public class Main{
 					he.thinking(p);
 				}
 			}
-			mainFrame.changeBackground(toPrint);
-			try{
+			//mainFrame.changeBackground(toPrint);
+			/*try{
 				thread.sleep(500);
 			} catch(Exception e){
 
-			}
+			}*/
 			for(Predator p:predatorsList){
 				if (p.isDead()==false){
 					p.check();
@@ -117,12 +117,12 @@ public class Main{
 				}
 			}
 			bigCheck();
-			mainFrame.changeBackground(toPrint);
-			try{
+			//mainFrame.changeBackground(toPrint);
+		/*	try{
 				thread.sleep(500);
 			} catch(Exception e){
 
-			}
+			}*/
 			Env.Print();
 		}
 	}
