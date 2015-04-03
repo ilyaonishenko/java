@@ -54,11 +54,13 @@ public class Actor{
 	{
 		return id;
 	}
-	public void refresh()
-{
+	public void refresh(){
 	this.before = Env.field[x][y];
 	Env.field[x][y]=id;
-}
+	}
+	public void clear(){
+		Env.field[x][y]=this.before;
+	}
 	public void info()
 	{
 		System.out.println("------------------------");
