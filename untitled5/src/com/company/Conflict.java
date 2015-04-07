@@ -9,6 +9,9 @@ public class Conflict{
 	static int[] arrayYHerbivore;
 	static int[] arrayYPredator;
 	static int[] arrayYPlant;
+    static List<Predator> secondPredatorList = new LinkedList<Predator>();
+    static List<Herbivore> secondHerbivoreList = new LinkedList<Herbivore>();
+    static List<Plant> secondPlantList = new LinkedList<Plant>();
 	private Conflict(List<Predator> predatorsList,List<Herbivore> herbivoresList,List<Plant> plantsList){
 
 	}
@@ -61,37 +64,52 @@ public class Conflict{
 				if(predatorsList.get(i).getX()==herbivoresList.get(j).getX()&&predatorsList.get(i).getY()==herbivoresList.get(j).getY()){
 					if(!herbivoresList.get(j).isDead()){
 						herbivoresList.get(j).death();
-						herbivoresList.get(j).info();
 					}
 				}
 			}
 		}
 	}
-    public static void fastCheck2(List<Herbivore> herbivoreList,int x,int y){
+    public static boolean fastCheck2(List<Herbivore> herbivoreList,int x,int y){
         for (int i=0;i<herbivoreList.size();i++){
             if (herbivoreList.get(i).getX()==x&&herbivoreList.get(i).getY()==y){
                 if(!herbivoreList.get(i).isDead()){
                     herbivoreList.get(i).death();
+                    return true;
                 }
             }
         }
+        return false;
     }
-    public static void fastCheck1(List<Plant> plantList,int x,int y){
-        for(int i=0;i<plantList.size();i++){
-            if(plantList.get(i).getX()==x&&plantList.get(i).getY()==y){
-                if(!plantList.get(i).isDead())
-                        plantList.get(i).death();
+    public static boolean fastCheck3(List<Predator> predatorList,int x,int y){
+        for(int i=0;i<predatorList.size();i++){
+            if(predatorList.get(i).getX()==x&&predatorList.get(i).getY()==y){
+                if(!predatorList.get(i).isDead()){
+                    predatorList.get(i).setEnetgy(predatorList.get(i).getEnergy()+Actor.max);
+                    return true;
+                }
             }
         }
+        return false;
     }
-	private static boolean compareArrays(int[] array1,int[] array2){
-		for(int i=0;i<array1.length;i++){
-			for(int j=0;j<array2.length;j++){
-				if (array1[i]==array2[j]){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    public static boolean fastCheck1(List<Plant> plantList,int x,int y){
+        for(int i=0;i<plantList.size();i++){
+            if(plantList.get(i).getX()==x&&plantList.get(i).getY()==y){
+                if(!plantList.get(i).isDead()) {
+                    plantList.get(i).death();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+	private static boolean compareArrays(int[] array1,int[] array2) {
+        for (int i = 0; i < array1.length; i++) {
+            for (int j = 0; j < array2.length; j++) {
+                if (array1[i] == array2[j]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

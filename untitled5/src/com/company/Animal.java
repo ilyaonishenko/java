@@ -41,6 +41,12 @@ public class Animal extends Actor{
 		refresh();
 	//	info();
 	}
+    public void lifeCheck(){
+        if (!isDead())
+            if(getEnergy()<=0){
+                death();
+            }
+    }
 	public char[] sight()
 	{
 		/*
@@ -147,4 +153,32 @@ public class Animal extends Actor{
 			}
 		}
 	}
+    public void thinking(char lookId){
+        char[] locs = sight();
+        boolean check =false;
+        for(int i=0;i<locs.length;i++){
+            if(locs[i]!='n'){
+                if(locs[i]==lookId){
+                    if(i==0){
+                        moveUp();
+                        check = true;
+                    }
+                    else if(i==1){
+                        moveRight();
+                        check  =true;
+                    }
+                    else if (i==2){
+                        moveDown();
+                        check = true;
+                    }
+                    else if(i==3){
+                        moveLeft();
+                        check = true;
+                    }
+                }
+            }
+        }
+        if(!check)
+            randomMove();
+    }
 }

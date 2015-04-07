@@ -10,7 +10,8 @@ public class Predator extends Animal{
             setX(getX()+1);
         setEnetgy(getEnergy()-1);
         // тут должна быть проверка
-        Conflict.fastCheck2(Main.herbivoresList, this.getX(), this.getY());
+        if(Conflict.fastCheck2(Main.herbivoresList, this.getX(), this.getY()))
+            this.setEnetgy(this.getEnergy() + max);
         refresh();
     }
     @Override
@@ -19,23 +20,28 @@ public class Predator extends Animal{
         if(!isDead())
             setX(getX()-1);
         setEnetgy(getEnergy()-1);
-        Conflict.fastCheck2(Main.herbivoresList,this.getX(),this.getY());
+        if(Conflict.fastCheck2(Main.herbivoresList,this.getX(),this.getY()))
+            this.setEnetgy(this.getEnergy() + max);
         refresh();
     }
     @Override
     public void moveDown(){
         clear();
-        setY(getY()+1);
+        if(!isDead())
+            setY(getY()+1);
         setEnetgy(getEnergy()-1);
-        Conflict.fastCheck2(Main.herbivoresList,this.getX(),this.getY());
+        if(Conflict.fastCheck2(Main.herbivoresList,this.getX(),this.getY()))
+            this.setEnetgy(this.getEnergy()+max);
         refresh();
     }
     @Override
     public void moveUp(){
         clear();
-        setY(getY()-1);
+        if(!isDead())
+            setY(getY()-1);
         setEnetgy(getEnergy()-1);
-        Conflict.fastCheck2(Main.herbivoresList,this.getX(),this.getY());
+        if(Conflict.fastCheck2(Main.herbivoresList,this.getX(),this.getY()))
+            this.setEnetgy(this.getEnergy()+max);
         refresh();
     }
 }
